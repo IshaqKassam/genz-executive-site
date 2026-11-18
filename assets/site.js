@@ -32,19 +32,69 @@
   ];
   var card=function(x,i){
     var u=safe((S.pay||{})[x.id]);
-    var btn=u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':'<a class="btn" aria-disabled="true" role="link" tabindex="-1">Opening soon</a>';
+    var btn=u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':'<a class="btn" href="index.html#join">Tell me when it opens <span class="arrow">→</span></a>';
     return '<article class="prod rv d'+(i%3)+(x.hot?' hot':'')+'"><span class="cover">'+C[x.id]+'</span><div class="body">'+(x.badge?'<span class="badge">'+esc(x.badge)+'</span>':'')+'<span class="k">'+esc(x.k)+'</span><h3>'+esc(x.t)+'</h3><p>'+esc(x.d)+'</p><div class="price">'+esc(x.p)+' <small>one-off</small></div>'+btn+'</div></article>';
   };
   var grid=$('#shopgrid');
   if(grid){var lim=+grid.getAttribute('data-limit')||PRODS.length;grid.innerHTML=PRODS.slice(0,lim).map(card).join('')}
   var dv=$('#deliver');if(dv)dv.textContent=S.deliveryPromise||'';
 
-  /* form */
+  /* form: native branded capture posting to the Google Form */
+  var F=S.formFields||{};
   $$('.formbox').forEach(function(fb){
-    var fu=safe(S.formEmbedUrl),fs=safe(S.formShareUrl);
-    if(fu){fb.innerHTML='<iframe src="'+esc(fu)+'" title="Launch list sign-up form" loading="lazy">Loading…</iframe>'+(fs?'<p class="note" style="text-align:center">Form not showing? <a href="'+esc(fs)+'" target="_blank" rel="noopener noreferrer">Open it in a new tab</a>.</p>':'')}
-    else{fb.innerHTML='<div class="soon"><strong>The launch list opens very soon.</strong>Check back in a few days'+(S.contactEmail?', or write to <a href="mailto:'+esc(S.contactEmail)+'">'+esc(S.contactEmail)+'</a>':'')+'.</div>'}
+    var act=safe(S.formAction);
+    if(!act){var fs=safe(S.formShareUrl);fb.innerHTML=fs?'<p class="note"><a class="btn blue" href="'+esc(fs)+'" target="_blank" rel="noopener noreferrer">Open the sign-up form</a></p>':'<div class="soon"><strong>The launch list opens very soon.</strong></div>';return}
+    var chips=['The book','The Climb','The community','Workshops and speaking'].map(function(v){return '<label class="chip"><input type="checkbox" name="i" value="'+v+'"><span>'+v+'</span></label>'}).join('');
+    var opts=['Student','Job seeker','First 5 years of work','Manager','Other'].map(function(v){return '<option>'+v+'</option>'}).join('');
+    fb.innerHTML='<form class="capture" novalidate><div class="row2"><label>First and last name<input name="n" autocomplete="name" required></label><label>Email<input type="email" name="e" autocomplete="email" required></label></div>'+
+      '<fieldset><legend>I want to hear about</legend><div class="chips">'+chips+'</div></fieldset>'+
+      '<label>Where are you in your career?<select name="c"><option value="">Choose one</option>'+opts+'</select></label>'+
+      '<label class="consent"><input type="checkbox" name="k" required><span>'+esc(S.consentText||'')+'</span></label>'+
+      '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+      '<p class="err" role="alert" hidden></p><button class="btn blue" type="submit">Join the launch list <span class="arrow">→</span></button>'+
+      '<p class="fine">One email when something opens. Unsubscribe any time.</p></form>'+
+      '<div class="done" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><h3>You are on the list.</h3><p>Thank you. We will email you when the book, The Climb and the community open.</p>'+(safe(S.linkedin)?'<a class="btn ghost on-dark" href="'+esc(S.linkedin)+'" target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a>':'')+'</div>';
+    var f=$('form',fb),er=$('.err',fb),bt=$('button',fb);
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault();er.hidden=true;
+      var nm=f.n.value.trim(),em=f.e.value.trim();
+      if(f.website.value)return;
+      if(!nm||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){er.textContent='Please add your name and a valid email.';er.hidden=false;return}
+      if(!f.k.checked){er.textContent='Please tick the consent box so we can email you.';er.hidden=false;return}
+      var p=new URLSearchParams();p.append(F.name,nm);p.append(F.email,em);
+      $$('input[name=i]:checked',f).forEach(function(c){p.append(F.interests,c.value)});
+      if(f.c.value)p.append(F.career,f.c.value);
+      p.append(F.consent,S.consentText);
+      bt.disabled=true;bt.classList.add('busy');
+      fetch(act,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).then(function(){
+        f.hidden=true;$('.done',fb).hidden=false;
+      }).catch(function(){bt.disabled=false;bt.classList.remove('busy');er.textContent='Something went wrong. Please try again.';er.hidden=false});
+    });
   });
+
+  /* proof (renders only what is real) */
+  var pf=$('#proof');
+  if(pf){
+    var t=(S.testimonials||[]).filter(function(x){return x&&x.q&&x.n}),v=safe(S.videoEmbedUrl),sc=safe(S.sampleChapterUrl),h='';
+    if(v)h+='<div class="vid rv"><iframe src="'+esc(v)+'" title="Welcome from Ishaq" loading="lazy" allowfullscreen></iframe></div>';
+    if(t.length)h+='<div class="quotes">'+t.slice(0,3).map(function(x,i){return '<figure class="rv d'+i+'"><blockquote>'+esc(x.q)+'</blockquote><figcaption><b>'+esc(x.n)+'</b>'+(x.r?'<span>'+esc(x.r)+'</span>':'')+'</figcaption></figure>'}).join('')+'</div>';
+    if(sc)h+='<p class="rv" style="margin-top:30px"><a class="btn blue" href="'+esc(sc)+'" target="_blank" rel="noopener noreferrer">Read a sample chapter <span class="arrow">→</span></a></p>';
+    if(h){$('.proofbody',pf).innerHTML=h;pf.hidden=false;$$('.rv',pf).forEach(function(e){e.classList.add('in')})}
+  }
+
+  /* counters */
+  var cn=$$('[data-count]');
+  var run=function(e){var to=+e.getAttribute('data-count'),t0=null;if(matchMedia('(prefers-reduced-motion:reduce)').matches){e.textContent=to;return}
+    var st=function(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/1200);e.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
+  if('IntersectionObserver' in window){var co=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){run(x.target);co.unobserve(x.target)}})},{threshold:.6});cn.forEach(function(e){co.observe(e)})}else{cn.forEach(function(e){e.textContent=e.getAttribute('data-count')})}
+
+  /* sticky mobile CTA: hidden while a sign-up form or the hero is on screen */
+  var sk=$('.stickycta');
+  if(sk&&'IntersectionObserver' in window){
+    var seen=0,watch=$$('.formbox,.hero');
+    var so=new IntersectionObserver(function(es){es.forEach(function(x){x.target._v=x.isIntersecting});seen=watch.some(function(w){return w._v});sk.classList.toggle('show',!seen)},{threshold:.15});
+    watch.forEach(function(w){so.observe(w)});
+  }
 
   /* links */
   var li=safe(S.linkedin);
