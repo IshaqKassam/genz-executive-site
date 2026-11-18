@@ -24,21 +24,21 @@
   window.GZ_COVERS=C;
 
   var PRODS=[
-    {id:'bundle',hot:1,badge:'Founding price',k:'Bundle',t:'The Starter Bundle',p:'KES 1,990',was:'KES 3,050 bought separately',d:'Everything you need to run your first 90 days and plan your next ten years: five products, one price.',
+    {id:'bundle',hot:1,who:'For: your first job and your next ten years, in one purchase.',badge:'Founding price',k:'Bundle',t:'The Starter Bundle',p:'KES 1,990',was:'KES 3,050 bought separately',d:'Everything you need to run your first 90 days and plan your next ten years: five products, one price.',
       inside:['90-Day Trust Build workbook (KES 990)','The Ten-Year You workbook (KES 790)','One-Pager Pack: templates for memos, updates and meetings (KES 590)','Weekly Review Planner, 13 weeks (KES 490)','Built, Not Born wallpaper pack, phone and desktop (KES 190)']},
-    {id:'wb90',k:'Workbook',t:'90-Day Trust Build',p:'KES 990',d:'A week-by-week plan to become the person your manager and colleagues rely on, with scripts to use word for word.',
+    {id:'wb90',who:'For: your first 90 days in a new role.',k:'Workbook',t:'90-Day Trust Build',p:'KES 990',d:'A week-by-week plan to become the person your manager and colleagues rely on, with scripts to use word for word.',
       inside:['13 weekly spreads: focus, coaching note, scripts and a Friday review','First-week conversation guide: what to ask your manager','Stakeholder map and a "when things go wrong" page','Day 30, 60 and 90 scorecards','One worked example week']},
-    {id:'wb10',k:'Workbook',t:'The Ten-Year You',p:'KES 790',d:'Decide who you are becoming, work backwards to this quarter, and check your progress every Friday.',
+    {id:'wb10',who:'For: anyone asking where this career is heading.',k:'Workbook',t:'The Ten-Year You',p:'KES 790',d:'Decide who you are becoming, work backwards to this quarter, and check your progress every Friday.',
       inside:['Letter from yourself in ten years','Values and strengths prompts','Work-backwards tables from ten years to this quarter','12 weekly Friday audits','A one-page profile template and a commitment page']},
-    {id:'cvkit',k:'Templates',t:'CV and LinkedIn Kit',p:'KES 790',d:'Make your CV and LinkedIn profile work for you, with fill-in layouts and formulas you can copy.',
+    {id:'cvkit',who:'For: job seekers and anyone updating their profile.',k:'Templates',t:'CV and LinkedIn Kit',p:'KES 790',d:'Make your CV and LinkedIn profile work for you, with fill-in layouts and formulas you can copy.',
       inside:['Three editable CV layouts: graduate, first job, 2 to 5 years','30 before-and-after bullet rewrites','Cover letter template and examples','10 headline formulas and an About-section formula','30-day LinkedIn posting plan with 12 post prompts','Connection and referral message templates']},
-    {id:'jour',k:'Printable journal',t:'The GenZ Executive Journal',p:'KES 1,200',d:'A year of weekly prompts and a simple daily habit: pick the one thing that matters, do it, and review each Friday.',
+    {id:'jour',who:'For: building a steady weekly habit.',k:'Printable journal',t:'The GenZ Executive Journal',p:'KES 1,200',d:'A year of weekly prompts and a simple daily habit: pick the one thing that matters, do it, and review each Friday.',
       inside:['52 weekly prompts, one for every week of the year','Daily "one thing" tracker with a note on what got in the way','A weekly review: what went well, what to change, next week\u2019s move','Print at home or at a print shop']}
   ];
   var card=function(x,i){
     var u=safe((S.pay||{})[x.id]);
-    var btn=u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':'<a class="btn" href="index.html#join">Tell me when it opens <span class="arrow">→</span></a>';
-    return '<article class="prod rv d'+(i%3)+(x.hot?' hot':'')+'"><span class="cover">'+C[x.id]+'</span><div class="body">'+(x.badge?'<span class="badge">'+esc(x.badge)+'</span>':'')+'<span class="k">'+esc(x.k)+'</span><h3>'+esc(x.t)+'</h3><p>'+esc(x.d)+'</p><div class="price">'+esc(x.p)+' <small>one-off</small>'+(x.was?'<s>'+esc(x.was)+'</s>':'')+'</div>'+(x.inside?'<details class="inside"><summary>What is inside</summary><ul>'+x.inside.map(function(i){return '<li>'+esc(i)+'</li>'}).join('')+'</ul></details>':'')+btn+'</div></article>';
+    var btn=u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':'<a class="btn" href="index.html#join">Reserve my copy <span class="arrow">→</span></a>';
+    return '<article class="prod rv d'+(i%3)+(x.hot?' hot':'')+'"><span class="cover">'+C[x.id]+'</span><div class="body">'+(x.badge?'<span class="badge">'+esc(x.badge)+'</span>':'')+'<span class="k">'+esc(x.k)+'</span><h3>'+esc(x.t)+'</h3><p>'+esc(x.d)+'</p>'+(x.who?'<p class="who">'+esc(x.who)+'</p>':'')+'<div class="price">'+esc(x.p)+' <small>one-off</small>'+(x.was?'<s>'+esc(x.was)+'</s>':'')+'</div>'+(x.inside?'<details class="inside"><summary>What is inside</summary><ul>'+x.inside.map(function(i){return '<li>'+esc(i)+'</li>'}).join('')+'</ul></details>':'')+btn+'</div></article>';
   };
   var grid=$('#shopgrid');
   if(grid){var lim=+grid.getAttribute('data-limit')||PRODS.length;grid.innerHTML=PRODS.slice(0,lim).map(card).join('')}
@@ -121,3 +121,5 @@ var bk=w.querySelector('.book');if(!bk)return;
 w.addEventListener('mousemove',function(e){var r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;bk.style.animation='none';bk.style.transform='rotateY('+(-18+x*26)+'deg) rotateX('+(4-y*14)+'deg)'});
 w.addEventListener('mouseleave',function(){bk.style.transform='';bk.style.animation=''});
 }catch(e){}})();
+
+(function(){try{var S=window.SITE||{};if(!S.contactEmail&&!S.linkedin){var a=document.querySelector('footer .js-email');var col=a&&a.closest('.cols>div');if(col)col.style.display='none'}}catch(e){}})();

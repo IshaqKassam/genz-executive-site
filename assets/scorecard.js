@@ -25,6 +25,7 @@
     if(s>=21)return['Laying foundations','The basics are forming. Focus on one or two skills for the next 30 days and the gains will show.'];
     return['Getting started','This is a normal place to begin. Pick one skill, run a small experiment this week, and re-score in 30 days.'];
   }
+  function rec(k){var m={'Money habits':'Start with The Ten-Year You workbook: it turns money and career goals into a plan you check every Friday.','Learning speed':'Start with The Ten-Year You workbook, with its weekly Friday audits that turn experience into learning.','Network':'Start with the CV and LinkedIn Kit, then use its message templates to reach three new people this month.'};return m[k]||'Start with the 90-Day Trust Build workbook: week-by-week moves and scripts for '+k.toLowerCase()+'. The Starter Bundle includes it and four more tools for KES 1,990.'}
   function done(){
     var s=A.reduce(function(a,b){return a+b},0),b=band(s);
     var rank=Q.map(function(q,n){return{k:q.k,v:A[n],tip:q.tip}}).sort(function(x,y){return x.v-y.v});
@@ -33,6 +34,7 @@
     root.innerHTML='<p class="scn">Your result</p><div class="scres"><div class="big"><b>'+s+'</b><span>out of 40</span></div><div><h2 class="scq" style="margin:0 0 8px">'+b[0]+'</h2><p style="margin:0;color:#BFD6E6">'+esc(b[1])+'</p></div></div>'+
       '<div class="scbars">'+Q.map(function(q,n){return '<div><span>'+esc(q.k)+'</span><i><u style="width:'+(A[n]*20)+'%"></u></i><b>'+A[n]+'</b></div>'}).join('')+'</div>'+
       '<div class="sctip"><p class="scn" style="margin:0 0 6px">Your focus for the next 30 days: '+esc(weak.k)+'</p><p style="margin:0">'+esc(weak.tip)+'</p></div>'+
+      '<div class="sctip" style="margin-top:18px"><p class="scn" style="margin:0 0 6px">Your next step</p><p style="margin:0 0 14px">'+esc(rec(weak.k))+'</p><div class="cta"><a class="btn blue" href="shop.html">See the matching tool</a><a class="btn ghost on-dark" href="downloads/first-90-days-checklist.pdf">Free First 90 Days checklist</a></div></div>'+
       '<div class="scshare"><textarea readonly rows="4" id="scshare">'+esc(share)+'</textarea><div class="cta"><button class="btn blue" type="button" id="sccopy">Copy for LinkedIn</button><a class="btn ghost on-dark" id="scli" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/feed/?shareActive=true&text='+encodeURIComponent(share)+'">Share on LinkedIn</a><button class="btn ghost on-dark" type="button" id="scagain">Retake</button></div></div>';
     $('#sccopy').addEventListener('click',function(){var t=$('#scshare');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand('copy')}this.textContent='Copied'});
     $('#scagain').addEventListener('click',function(){A=[];i=0;ask()});
