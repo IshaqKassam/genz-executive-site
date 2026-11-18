@@ -24,15 +24,15 @@
   window.GZ_COVERS=C;
 
   var PRODS=[
-    {id:'bundle',hot:1,badge:'Best value',k:'Bundle',t:'The Starter Bundle',p:'KES 2,500',was:'KES 3,800 bought separately',d:'Everything you need to run your first 90 days and plan your next ten years: five products, one price.',
-      inside:['90-Day Trust Build workbook (KES 1,200)','The Ten-Year You workbook (KES 900)','One-Pager Pack: templates for memos, updates and meetings (KES 800)','Weekly Review Planner, 13 weeks (KES 600)','Built, Not Born wallpaper pack, phone and desktop (KES 300)']},
-    {id:'wb90',k:'Workbook',t:'90-Day Trust Build',p:'KES 1,200',d:'A week-by-week plan to become the person your manager and colleagues rely on, with scripts to use word for word.',
+    {id:'bundle',hot:1,badge:'Founding price',k:'Bundle',t:'The Starter Bundle',p:'KES 1,990',was:'KES 3,050 bought separately',d:'Everything you need to run your first 90 days and plan your next ten years: five products, one price.',
+      inside:['90-Day Trust Build workbook (KES 990)','The Ten-Year You workbook (KES 790)','One-Pager Pack: templates for memos, updates and meetings (KES 590)','Weekly Review Planner, 13 weeks (KES 490)','Built, Not Born wallpaper pack, phone and desktop (KES 190)']},
+    {id:'wb90',k:'Workbook',t:'90-Day Trust Build',p:'KES 990',d:'A week-by-week plan to become the person your manager and colleagues rely on, with scripts to use word for word.',
       inside:['13 weekly spreads: focus, coaching note, scripts and a Friday review','First-week conversation guide: what to ask your manager','Stakeholder map and a "when things go wrong" page','Day 30, 60 and 90 scorecards','One worked example week']},
-    {id:'wb10',k:'Workbook',t:'The Ten-Year You',p:'KES 900',d:'Decide who you are becoming, work backwards to this quarter, and check your progress every Friday.',
+    {id:'wb10',k:'Workbook',t:'The Ten-Year You',p:'KES 790',d:'Decide who you are becoming, work backwards to this quarter, and check your progress every Friday.',
       inside:['Letter from yourself in ten years','Values and strengths prompts','Work-backwards tables from ten years to this quarter','12 weekly Friday audits','A one-page profile template and a commitment page']},
-    {id:'cvkit',k:'Templates',t:'CV and LinkedIn Kit',p:'KES 1,000',d:'Make your CV and LinkedIn profile work for you, with fill-in layouts and formulas you can copy.',
+    {id:'cvkit',k:'Templates',t:'CV and LinkedIn Kit',p:'KES 790',d:'Make your CV and LinkedIn profile work for you, with fill-in layouts and formulas you can copy.',
       inside:['Three editable CV layouts: graduate, first job, 2 to 5 years','30 before-and-after bullet rewrites','Cover letter template and examples','10 headline formulas and an About-section formula','30-day LinkedIn posting plan with 12 post prompts','Connection and referral message templates']},
-    {id:'jour',k:'Printable journal',t:'The GenZ Executive Journal',p:'KES 1,500',d:'A year of weekly prompts and a simple daily habit: pick the one thing that matters, do it, and review each Friday.',
+    {id:'jour',k:'Printable journal',t:'The GenZ Executive Journal',p:'KES 1,200',d:'A year of weekly prompts and a simple daily habit: pick the one thing that matters, do it, and review each Friday.',
       inside:['52 weekly prompts, one for every week of the year','Daily "one thing" tracker with a note on what got in the way','A weekly review: what went well, what to change, next week\u2019s move','Print at home or at a print shop']}
   ];
   var card=function(x,i){
@@ -114,3 +114,10 @@
     els.forEach(function(e){io.observe(e)});
   }else{els.forEach(function(e){e.classList.add('in')})}
 })();
+
+(function(){try{
+var w=document.querySelector('.hero-book');if(!w||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var bk=w.querySelector('.book');if(!bk)return;
+w.addEventListener('mousemove',function(e){var r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;bk.style.animation='none';bk.style.transform='rotateY('+(-18+x*26)+'deg) rotateX('+(4-y*14)+'deg)'});
+w.addEventListener('mouseleave',function(){bk.style.transform='';bk.style.animation=''});
+}catch(e){}})();

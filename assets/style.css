@@ -370,3 +370,21 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .inside summary::after{content:" +"}.inside[open] summary::after{content:" \2212"}
 .inside ul{margin:10px 0 0;padding-left:18px;font-size:14px;line-height:1.5;display:grid;gap:6px}
 .done .dl{display:grid;gap:12px;margin:0 0 20px}.done .dl .btn{width:100%}
+
+/* v4 approved cover + hero book + motion */
+.book .face{background:#0B0B0C;background-image:none;padding:6% 8% 7%;align-items:flex-start;justify-content:flex-start;gap:0;box-shadow:28px 34px 60px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05)}
+.book .face::before{background:linear-gradient(90deg,rgba(255,255,255,.12),transparent);width:10px}
+.book .launch{font:500 9px/1 'Figtree',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9A9AA2}
+.book .ttl{margin-top:auto;display:flex;flex-direction:column;width:100%;font-family:'Anton',Impact,'Arial Narrow',sans-serif;text-transform:uppercase;font-weight:400}
+.book .ttl .a{font-size:clamp(22px,2.4vw,30px);line-height:1;color:#fff;letter-spacing:.01em}
+.book .ttl .b{font-size:clamp(78px,9vw,106px);line-height:.86;color:#fff}
+.book .ttl .c{font-size:clamp(42px,4.9vw,57px);line-height:1.02;color:#7CC4E8}
+.book .ttl .sub{font:italic 400 clamp(14px,1.5vw,17px)/1.2 'Instrument Serif',Georgia,serif;text-transform:none;color:#fff;margin-top:6%}
+.book .by{align-self:center;margin-top:7%;font:400 clamp(18px,2vw,24px)/1 'Anton',Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.hero-book{display:flex;justify-content:center;align-items:center}
+.hero-book .book{width:min(380px,78vw)}
+.hero-book .bookwrap{transform:scale(1.04)}
+.hero h1 .ex{background:linear-gradient(90deg,#7CC4E8,#3BA3DB,#7CC4E8);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% 0}}
+@media(max-width:900px){.hero-book{order:-1;margin-bottom:8px}.hero-book .book{width:min(260px,64vw)}}
+@media(prefers-reduced-motion:reduce){.hero h1 .ex{animation:none}}
