@@ -24,16 +24,21 @@
   window.GZ_COVERS=C;
 
   var PRODS=[
-    {id:'bundle',hot:1,badge:'Best value',k:'Bundle',t:'The Starter Bundle',p:'KES 2,500',d:'Both workbooks, the templates, the planner and the wallpaper pack in one purchase. Saves KES 1,300.'},
-    {id:'wb90',k:'Workbook',t:'90-Day Trust Build',p:'KES 1,200',d:'Weekly plans, a stakeholder map, Friday reviews and a day-90 scorecard for your first three months.'},
-    {id:'wb10',k:'Workbook',t:'The Ten-Year You',p:'KES 900',d:'Draw your future self, choose this week’s behaviour and run a Friday audit.'},
-    {id:'cvkit',k:'Templates',t:'CV and LinkedIn Kit',p:'KES 1,000',d:'Three CV layouts, a cover letter template and a headline-and-about formula for early-career roles.'},
-    {id:'jour',k:'Printable journal',t:'The GenZ Executive Journal',p:'KES 1,500',d:'52 weeks of building yourself: a daily loop, a weekly review and a prompt for every week.'}
+    {id:'bundle',hot:1,badge:'Best value',k:'Bundle',t:'The Starter Bundle',p:'KES 2,500',was:'KES 3,800 bought separately',d:'Everything you need to run your first 90 days and plan your next ten years: five products, one price.',
+      inside:['90-Day Trust Build workbook (KES 1,200)','The Ten-Year You workbook (KES 900)','One-Pager Pack: templates for memos, updates and meetings (KES 800)','Weekly Review Planner, 13 weeks (KES 600)','Built, Not Born wallpaper pack, phone and desktop (KES 300)']},
+    {id:'wb90',k:'Workbook',t:'90-Day Trust Build',p:'KES 1,200',d:'A week-by-week plan to become the person your manager and colleagues rely on, with scripts to use word for word.',
+      inside:['13 weekly spreads: focus, coaching note, scripts and a Friday review','First-week conversation guide: what to ask your manager','Stakeholder map and a "when things go wrong" page','Day 30, 60 and 90 scorecards','One worked example week']},
+    {id:'wb10',k:'Workbook',t:'The Ten-Year You',p:'KES 900',d:'Decide who you are becoming, work backwards to this quarter, and check your progress every Friday.',
+      inside:['Letter from yourself in ten years','Values and strengths prompts','Work-backwards tables from ten years to this quarter','12 weekly Friday audits','A one-page profile template and a commitment page']},
+    {id:'cvkit',k:'Templates',t:'CV and LinkedIn Kit',p:'KES 1,000',d:'Make your CV and LinkedIn profile work for you, with fill-in layouts and formulas you can copy.',
+      inside:['Three editable CV layouts: graduate, first job, 2 to 5 years','30 before-and-after bullet rewrites','Cover letter template and examples','10 headline formulas and an About-section formula','30-day LinkedIn posting plan with 12 post prompts','Connection and referral message templates']},
+    {id:'jour',k:'Printable journal',t:'The GenZ Executive Journal',p:'KES 1,500',d:'A year of weekly prompts and a simple daily habit: pick the one thing that matters, do it, and review each Friday.',
+      inside:['52 weekly prompts, one for every week of the year','Daily "one thing" tracker with a note on what got in the way','A weekly review: what went well, what to change, next week\u2019s move','Print at home or at a print shop']}
   ];
   var card=function(x,i){
     var u=safe((S.pay||{})[x.id]);
     var btn=u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':'<a class="btn" href="index.html#join">Tell me when it opens <span class="arrow">→</span></a>';
-    return '<article class="prod rv d'+(i%3)+(x.hot?' hot':'')+'"><span class="cover">'+C[x.id]+'</span><div class="body">'+(x.badge?'<span class="badge">'+esc(x.badge)+'</span>':'')+'<span class="k">'+esc(x.k)+'</span><h3>'+esc(x.t)+'</h3><p>'+esc(x.d)+'</p><div class="price">'+esc(x.p)+' <small>one-off</small></div>'+btn+'</div></article>';
+    return '<article class="prod rv d'+(i%3)+(x.hot?' hot':'')+'"><span class="cover">'+C[x.id]+'</span><div class="body">'+(x.badge?'<span class="badge">'+esc(x.badge)+'</span>':'')+'<span class="k">'+esc(x.k)+'</span><h3>'+esc(x.t)+'</h3><p>'+esc(x.d)+'</p><div class="price">'+esc(x.p)+' <small>one-off</small>'+(x.was?'<s>'+esc(x.was)+'</s>':'')+'</div>'+(x.inside?'<details class="inside"><summary>What is inside</summary><ul>'+x.inside.map(function(i){return '<li>'+esc(i)+'</li>'}).join('')+'</ul></details>':'')+btn+'</div></article>';
   };
   var grid=$('#shopgrid');
   if(grid){var lim=+grid.getAttribute('data-limit')||PRODS.length;grid.innerHTML=PRODS.slice(0,lim).map(card).join('')}
@@ -53,7 +58,7 @@
       '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'+
       '<p class="err" role="alert" hidden></p><button class="btn blue" type="submit">Join the launch list <span class="arrow">→</span></button>'+
       '<p class="fine">One email when something opens. Unsubscribe any time.</p></form>'+
-      '<div class="done" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><h3>You are on the list.</h3><p>Thank you. We will email you when the book, The Climb and the community open.</p>'+(safe(S.linkedin)?'<a class="btn ghost on-dark" href="'+esc(S.linkedin)+'" target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a>':'')+'</div>';
+      '<div class="done" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><h3>You are on the list.</h3><p>Thank you. We will email you when the book, The Climb and the community open.</p>'+(S.freeDownloads&&S.freeDownloads.length?'<div class="dl">'+S.freeDownloads.map(function(d){return '<a class="btn blue" href="'+esc(d.u)+'" download>'+esc(d.t)+' <span class="arrow">↓</span></a>'}).join('')+'</div>':'')+(safe(S.linkedin)?'<a class="btn ghost on-dark" href="'+esc(S.linkedin)+'" target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a>':'')+'</div>';
     var f=$('form',fb),er=$('.err',fb),bt=$('button',fb);
     f.addEventListener('submit',function(ev){
       ev.preventDefault();er.hidden=true;

@@ -13,6 +13,8 @@ var SITE = {
   testimonials: [],
   videoEmbedUrl: "",      // https YouTube or Vimeo embed URL of the 60-second welcome video
   sampleChapterUrl: "",   // https link to the sample chapter PDF
+  // Free downloads shown after sign-up: [{t:'Free First 90 Days Checklist', u:'downloads/first-90-days-checklist.pdf'}]. Free files only; never put paid files in this public repo.
+  freeDownloads: [{t:'Download the free First 90 Days Checklist', u:'downloads/first-90-days-checklist.pdf'},{t:'Download the free Executive Scorecard', u:'downloads/genz-executive-scorecard.pdf'}],
   // Payment links from Paystack (or IntaSend). One per product. "" = Opening soon.
   pay: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "" },
   contactEmail: "",
