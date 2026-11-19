@@ -16,9 +16,9 @@ var SITE = {
   // Free downloads shown after sign-up: [{t:'Free First 90 Days Checklist', u:'downloads/first-90-days-checklist.pdf'}]. Free files only; never put paid files in this public repo.
   freeDownloads: [{t:'Download the free First 90 Days Checklist', u:'downloads/first-90-days-checklist.pdf'}],
   // Payment links from Paystack (or IntaSend). One per product. "" = Opening soon.
-  pay: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", onepager: "", wallpapers: "" },
+  pay: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", meetings: "", strategy: "", budget: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
   offer: { ends: "2027-02-28T23:59:59+03:00" },
-  payRegular: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", onepager: "", wallpapers: "" },
+  payRegular: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", meetings: "", strategy: "", budget: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
   contactEmail: "ishaq.kassam@gmail.com",
   linkedin: "",
   deliveryPromise: "Your files are emailed to you within one working day of payment."
