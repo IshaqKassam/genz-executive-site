@@ -23,7 +23,7 @@ var SITE = {
   // MailerLite: paste the form action URL from your MailerLite embedded form (https://assets.mailerlite.com/jsonp/ACCOUNT/forms/FORMID/subscribe). Leave empty until ready.
   mailerliteAction: "https://assets.mailerlite.com/jsonp/2809345/forms/204567460482909852/subscribe",
   // Ask Ishaq form (Google Form). Paste the formResponse URL and the entry ids. Empty = opens the visitor's email app instead.
-  ask: { action: "", fields: { type: "", message: "", name: "", email: "", feature: "" } },
+  ask: { action: "https://docs.google.com/forms/d/e/1FAIpQLSd3pqNU3zoM63YpgB6ztMuv9Ttq4ZeGjXEd7AofMDwV0EOX0Q/formResponse", fields: { type: "entry.1677326359", message: "entry.1313779110", name: "entry.616311508", email: "entry.948189006", feature: "entry.1511880767" } },
   giftUrl: "",
   pledgeUrl: "",
   contactEmail: "ishaq.kassam@gmail.com",
