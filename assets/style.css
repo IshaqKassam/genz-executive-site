@@ -427,3 +427,23 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .book .ttl .c{font-size:21.3cqw;line-height:1.02;color:#7CC4E8}
 .book .ttl .sub{font:italic 400 6.7cqw/1.2 'Instrument Serif',Georgia,serif;text-transform:none;letter-spacing:0;color:#fff;margin-top:9cqw}
 .book .by{align-self:center;margin-top:10cqw;font:400 10.3cqw/1 'Anton',Impact,'Arial Narrow',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;white-space:nowrap}
+
+/* v8 polish */
+.bookgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.bookcopy{max-width:720px}
+.chcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:30px 30px 22px;backdrop-filter:blur(6px)}
+.chcard .chk{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin-bottom:18px}
+.chcard .chrow{padding:16px 0;border-top:1px solid rgba(255,255,255,.12)}
+.chcard .chrow b{display:block;font:600 15px/1.2 'Figtree',sans-serif;color:#fff;margin-bottom:6px}
+.chcard .chrow p{margin:0;color:rgba(255,255,255,.75);font-size:16px;line-height:1.55}
+@media(max-width:860px){.bookgrid{grid-template-columns:1fr;gap:34px}}
+@media(max-width:700px){.hero-book .book{width:min(190px,50vw)}}
+/* reused artwork gets its own tint so every product looks distinct */
+.prod[data-p=planner] .cover{filter:hue-rotate(-28deg) saturate(1.1)}
+.prod[data-p=meetings] .cover{filter:hue-rotate(32deg) saturate(1.15)}
+.prod[data-p=strategy] .cover{filter:hue-rotate(-48deg) saturate(1.2)}
+.prod[data-p=budget] .cover{filter:hue-rotate(70deg) saturate(1.1)}
+.prod[data-p=scorecards] .cover{filter:hue-rotate(-95deg) saturate(1.1)}
+.prod[data-p=onepager] .cover{filter:hue-rotate(12deg)}
+.prod[data-p=wallpapers] .cover{filter:hue-rotate(50deg)}
+.prod[data-p=toolkit] .cover{filter:hue-rotate(-20deg) saturate(1.15)}
