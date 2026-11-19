@@ -372,15 +372,6 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .done .dl{display:grid;gap:12px;margin:0 0 20px}.done .dl .btn{width:100%}
 
 /* v4 approved cover + hero book + motion */
-.book .face{background:#0B0B0C;background-image:none;padding:6% 8% 7%;align-items:flex-start;justify-content:flex-start;gap:0;box-shadow:28px 34px 60px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05)}
-.book .face::before{background:linear-gradient(90deg,rgba(255,255,255,.12),transparent);width:10px}
-.book .launch{font:500 9px/1 'Figtree',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9A9AA2}
-.book .ttl{margin-top:auto;display:flex;flex-direction:column;width:100%;font-family:'Anton',Impact,'Arial Narrow',sans-serif;text-transform:uppercase;font-weight:400}
-.book .ttl .a{font-size:clamp(22px,2.4vw,30px);line-height:1;color:#fff;letter-spacing:.01em}
-.book .ttl .b{font-size:clamp(78px,9vw,106px);line-height:.86;color:#fff}
-.book .ttl .c{font-size:clamp(42px,4.9vw,57px);line-height:1.02;color:#7CC4E8}
-.book .ttl .sub{font:italic 400 clamp(14px,1.5vw,17px)/1.2 'Instrument Serif',Georgia,serif;text-transform:none;color:#fff;margin-top:6%}
-.book .by{align-self:center;margin-top:7%;font:400 clamp(18px,2vw,24px)/1 'Anton',Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff}
 .hero-book{display:flex;justify-content:center;align-items:center}
 .hero-book .book{width:min(380px,78vw)}
 .hero-book .bookwrap{transform:scale(1.04)}
@@ -404,10 +395,6 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .ladder a{font-weight:600;color:var(--blue);text-decoration:none}
 @media(max-width:1000px){.ladder{grid-template-columns:1fr}.ladder li{margin-top:0!important}}
 
-.book{container-type:inline-size}
-.book .launch{font-size:2.8cqw}
-.book .ttl .a{font-size:9cqw}.book .ttl .b{font-size:30cqw}.book .ttl .c{font-size:15cqw}
-.book .ttl .sub{font-size:4.8cqw}.book .by{font-size:6.6cqw}
 .statement .sub{color:#BFD6E6}
 
 /* v6 shop hero bundle + singles */
@@ -427,3 +414,16 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .offer{display:inline-block;background:#E4F1FA;color:#0F2233;border:1px solid #BFD9EC;border-radius:999px;padding:9px 18px;font:600 14.5px/1.3 'Figtree',sans-serif;margin:0 0 22px}
 .offer[hidden]{display:none}
 .urgency{margin:0 0 12px;font-size:14px;font-weight:600;color:#1668A0}
+
+/* v7 approved cover, built from the design canvas (600x900, all sizes proportional to cover width) */
+.book{container-type:inline-size;width:min(340px,72vw);aspect-ratio:2/3;transform:rotateY(-18deg) rotateX(3deg)}
+.bookwrap:hover .book{transform:rotateY(-6deg) rotateX(1deg)}
+.book .face{background:#0B0B0C;background-image:none;border-radius:3px 9px 9px 3px;padding:10.3cqw 9cqw 8.7cqw;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0;overflow:hidden;box-shadow:26px 34px 60px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.06)}
+.book .face::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2.4cqw;background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,.02) 60%,transparent)}
+.book .launch{font:500 3cqw/1 'Figtree',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9A9AA2}
+.book .ttl{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;width:100%;font-family:'Anton',Impact,'Arial Narrow',sans-serif;text-transform:uppercase;font-weight:400}
+.book .ttl .a{font-size:13.7cqw;line-height:1;letter-spacing:.01em;color:#fff}
+.book .ttl .b{font-size:39.7cqw;line-height:.86;color:#fff;margin-left:-.6cqw}
+.book .ttl .c{font-size:21.3cqw;line-height:1.02;color:#7CC4E8}
+.book .ttl .sub{font:italic 400 6.7cqw/1.2 'Instrument Serif',Georgia,serif;text-transform:none;letter-spacing:0;color:#fff;margin-top:9cqw}
+.book .by{align-self:center;margin-top:10cqw;font:400 10.3cqw/1 'Anton',Impact,'Arial Narrow',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;white-space:nowrap}

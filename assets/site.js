@@ -148,7 +148,7 @@
 (function(){try{
 var w=document.querySelector('.hero-book');if(!w||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
 var bk=w.querySelector('.book');if(!bk)return;
-w.addEventListener('mousemove',function(e){var r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;bk.style.animation='none';bk.style.transform='rotateY('+(-18+x*26)+'deg) rotateX('+(4-y*14)+'deg)'});
+w.addEventListener('mousemove',function(e){var r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;bk.style.animation='none';bk.style.transform='rotateY('+(-12+x*26)+'deg) rotateX('+(3-y*14)+'deg)'});
 w.addEventListener('mouseleave',function(){bk.style.transform='';bk.style.animation=''});
 }catch(e){}})();
 
