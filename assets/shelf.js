@@ -183,7 +183,6 @@ var B=[
 [13, "The Drama of Atheist Humanism", "Henri de Lubac", "A Catholic response to modern atheist thought.", ""],
 [13, "A Jewish Theology", "Behrman House", "An introduction to Jewish belief.", ""],
 [13, "Everyman’s Talmud", "Abraham Cohen", "A guide to rabbinic teaching.", ""],
-[13, "Gospel of Barnabas", "Barnabas", "An apocryphal text of disputed origin; read as a historical curiosity.", ""],
 [13, "The Dhammapada", "Anonymous (sayings of the Buddha)", "Short verses on training the mind.", ""],
 [13, "The Blind Beekeeper", "Daniel Abdal-Hayy Moore", "Poems of faith and wonder.", ""],
 [14, "Crime and Punishment", "Fyodor Dostoevsky", "What the belief that exceptional people can break the rules does to a man.", "r"],
