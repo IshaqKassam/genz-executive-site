@@ -619,3 +619,4 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .stairs>li.lit{opacity:1;transform:none}
 .stairs>li.lit::before{box-shadow:0 0 0 6px rgba(47,107,255,.15)}
 @media(prefers-reduced-motion:reduce){.stairs>li{opacity:1;transform:none}.sprog{display:none}}
+.hero .lede+.cta,.hero .lede~.cta{margin-top:26px}
