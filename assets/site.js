@@ -33,6 +33,7 @@
   $$('.js-offer').forEach(function(e){if(isOpen){e.textContent='Founding prices end '+endsText+' ('+(daysLeft>1?daysLeft+' days left':'last day')+'). Regular prices apply after.';e.hidden=false}else{e.hidden=true}});
   $$('.js-from').forEach(function(e){e.textContent=isOpen?'From KES 790':'From KES 1,200'});
 
+  C.planner=C.wb90;C.onepager=C.cvkit;C.wallpapers=C.wb10;
   var PRODS=[
     {id:'bundle',hot:1,f:1990,r:2900,who:'For: your first job and your next ten years, in one purchase.',k:'Bundle',t:'The Starter Bundle',d:'Everything you need to run your first 90 days and plan your next ten years: five tools, one price.',
       inside:['90-Day Trust Build workbook, 26 pages (KES 1,500)','The Ten-Year You workbook, 17 pages (KES 1,200)','One-Pager Pack: templates for memos, updates and meetings, 17 pages (KES 900)','Weekly Review Planner, 13 weeks, 20 pages (KES 700)','Built, Not Born wallpaper pack, phone and desktop (KES 300)','Bought separately at regular prices: KES 4,600']},
@@ -43,7 +44,12 @@
     {id:'cvkit',f:790,r:1200,who:'For: job seekers and anyone updating their profile.',k:'Templates',t:'CV and LinkedIn Kit',d:'Make your CV and LinkedIn profile work for you, with fill-in layouts and formulas you can copy.',
       inside:['Three editable CV layouts: graduate, first job, 2 to 5 years','30 before-and-after bullet rewrites','Cover letter template and examples','10 headline formulas and an About-section formula','30-day LinkedIn posting plan with 12 post prompts','Connection and referral message templates']},
     {id:'jour',f:1200,r:1500,who:'For: building a steady weekly habit.',k:'Printable journal',t:'The GenZ Executive Journal',d:'A year of weekly prompts and a simple daily habit: pick the one thing that matters, do it, and review each Friday.',
-      inside:['52 weekly prompts, one for every week of the year','Daily "one thing" tracker with a note on what got in the way','A weekly review: what went well, what to change, next week’s move','Print at home or at a print shop']}
+      inside:['52 weekly prompts, one for every week of the year','Daily "one thing" tracker with a note on what got in the way','A weekly review: what went well, what to change, next week’s move','Print at home or at a print shop']}    ,{id:'planner',f:490,r:700,who:'For: a steady weekly rhythm at work.',k:'Entry tool',t:'Weekly Review Planner',d:'Thirteen weeks of one-page reviews: what went well, what to change, and next week\u2019s move.',
+      inside:['13 weekly review spreads, 20 pages','Quarter goals page and a habit tracker','Print at home or at a print shop']},
+    {id:'onepager',f:590,r:900,who:'For: writing updates your manager actually reads.',k:'Entry tool',t:'One-Pager Pack',d:'Fill-in templates for memos, status updates and meeting notes, built on the answer-first shape.',
+      inside:['Templates for memos, updates and meetings, 17 pages','Answer-first worked examples','Editable, so you can reuse them every week']},
+    {id:'wallpapers',f:190,r:300,who:'For: a daily reminder on your phone and desktop.',k:'Entry tool',t:'Built, Not Born Wallpapers',d:'Phone and desktop wallpapers with lines from the book, to keep the habit in front of you.',
+      inside:['Eight wallpapers: phone and desktop sizes','PNG files, ready to set']}
   ];
   var card=function(x,i){
     var u=safe((isOpen?(S.pay||{}):(S.payRegular||{}))[x.id]);
