@@ -100,6 +100,8 @@
       if(f.c.value)p.append(F.career,f.c.value);
       p.append(F.consent,S.consentText);
       if(F.source)p.append(F.source,(fb.getAttribute('data-source')||(location.pathname.replace(/\W/g,'')||'home')));
+      var ml=safe(S.mailerliteAction);
+      if(ml){var q=new URLSearchParams();q.append('fields[email]',em);q.append('fields[name]',nm);q.append('ml-submit','1');q.append('anticsrf','true');fetch(ml,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:q.toString()}).catch(function(){})}
       bt.disabled=true;bt.classList.add('busy');
       fetch(act,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).then(function(){
         f.hidden=true;$('.done',fb).hidden=false;

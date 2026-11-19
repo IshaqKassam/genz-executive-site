@@ -20,6 +20,8 @@ var SITE = {
   pay: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", meetings: "", strategy: "", budget: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
   offer: { ends: "2027-02-28T23:59:59+03:00" },
   payRegular: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", meetings: "", strategy: "", budget: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
+  // MailerLite: paste the form action URL from your MailerLite embedded form (https://assets.mailerlite.com/jsonp/ACCOUNT/forms/FORMID/subscribe). Leave empty until ready.
+  mailerliteAction: "",
   contactEmail: "ishaq.kassam@gmail.com",
   linkedin: "",
   deliveryPromise: "Your files are emailed to you within one working day of payment."
