@@ -791,3 +791,5 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 
 .urgency.save{display:inline-block;background:rgba(124,196,232,.16);color:var(--sky);padding:8px 14px;border-radius:999px;font-weight:700}
 .prod:not(.hot) .urgency.save{color:var(--blue);background:var(--ice)}
+
+.scwrap{max-width:760px;margin-left:auto;margin-right:auto}
