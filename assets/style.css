@@ -594,3 +594,16 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 @media(max-width:700px){.herospines{left:0;justify-content:center;padding:0 3%}.shelfhero{padding-bottom:150px}}
 @media(max-width:700px){.bkm.in.open .bkm-book{transform:translateX(0)}.bkm-book{--bw:min(340px,86vw)}}
 .herospines{left:0;background:none;padding-right:6%}@media(max-width:700px){.herospines{padding:0 3%}}
+
+/* Real covers */
+.sp.cvr{padding:0;background:#1d1a17;border-radius:2px 5px 5px 2px;box-shadow:inset 3px 0 0 rgba(255,255,255,.18),inset 6px 0 8px rgba(0,0,0,.35),4px 6px 14px rgba(0,0,0,.55)}
+.unit.in .sp.cvr{background-image:var(--img);background-size:cover;background-position:center}
+.sp.cvr::before,.sp.cvr::after{display:none}
+.sp.cvr .t,.sp.cvr .a{display:none}
+.sp.cvr .star,.sp.cvr .rib{z-index:2}
+.sp.cvr::marker{content:""}
+.sp.cvr:not(.dim):hover{transform:translateY(-10px) rotate(0) scale(1.06);z-index:5}
+.covbtn.on{background:#f1d58a;color:#2a1d0c;border-color:#f1d58a}
+.cv-front.hascv{background-size:cover;background-position:center;padding:0}
+.cv-front.hascv .cvshade{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(255,255,255,.16) 6%,rgba(255,255,255,0) 26%)}
+.covcredit{font-size:.75rem;opacity:.6;margin-top:10px}
