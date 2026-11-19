@@ -105,6 +105,7 @@
   var li=safe(S.linkedin);
   $$('.js-linkedin').forEach(function(a){if(li){a.href=li;a.target='_blank';a.rel='noopener noreferrer'}else{a.style.display='none'}});
   $$('.js-email').forEach(function(a){if(S.contactEmail){a.href='mailto:'+S.contactEmail;a.textContent=S.contactEmail}else{a.style.display='none'}});
+  $$('.js-enquiry').forEach(function(a){if(S.contactEmail){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent('Speaking enquiry')+'&body='+encodeURIComponent('Hello Ishaq,\n\nEvent and organisation:\nAudience and size:\nPreferred date and place (or online):\nFormat (keynote, workshop, panel):\n\nThank you,\n')}else{a.style.display='none'}});
   var yr=$('#yr');if(yr)yr.textContent=new Date().getFullYear();
 
   /* reveal */
