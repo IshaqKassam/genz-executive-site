@@ -61,16 +61,17 @@
   $$('.formbox').forEach(function(fb){
     var act=safe(S.formAction);
     if(!act){var fs=safe(S.formShareUrl);fb.innerHTML=fs?'<p class="note"><a class="btn blue" href="'+esc(fs)+'" target="_blank" rel="noopener noreferrer">Open the sign-up form</a></p>':'<div class="soon"><strong>The launch list opens very soon.</strong></div>';return}
-    var chips=['The book','The Climb','The community','Workshops and speaking'].map(function(v){return '<label class="chip"><input type="checkbox" name="i" value="'+v+'"><span>'+v+'</span></label>'}).join('');
+    var pre=(fb.getAttribute('data-interest')||'').split('|'),cta=fb.getAttribute('data-cta')||'Join the launch list',dn=fb.getAttribute('data-done')||'Thank you. We will email you when the book, The Climb and the community open.';
+    var chips=['The book','The Climb','The community','Workshops and speaking'].map(function(v){return '<label class="chip"><input type="checkbox" name="i" value="'+v+'"'+(pre.indexOf(v)>-1?' checked':'')+'><span>'+v+'</span></label>'}).join('');
     var opts=['Student','Job seeker','First 5 years of work','Manager','Other'].map(function(v){return '<option>'+v+'</option>'}).join('');
     fb.innerHTML='<form class="capture" novalidate><div class="row2"><label>First and last name<input name="n" autocomplete="name" required></label><label>Email<input type="email" name="e" autocomplete="email" required></label></div>'+
       '<fieldset><legend>I want to hear about</legend><div class="chips">'+chips+'</div></fieldset>'+
       '<label>Where are you in your career?<select name="c"><option value="">Choose one</option>'+opts+'</select></label>'+
       '<label class="consent"><input type="checkbox" name="k" required><span>'+esc(S.consentText||'')+'</span></label>'+
       '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'+
-      '<p class="err" role="alert" hidden></p><button class="btn blue" type="submit">Join the launch list <span class="arrow">→</span></button>'+
+      '<p class="err" role="alert" hidden></p><button class="btn blue" type="submit">'+esc(cta)+' <span class="arrow">→</span></button>'+
       '<p class="fine">One email when something opens. Unsubscribe any time.</p></form>'+
-      '<div class="done" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><h3>You are on the list.</h3><p>Thank you. We will email you when the book, The Climb and the community open.</p>'+(S.freeDownloads&&S.freeDownloads.length?'<div class="dl">'+S.freeDownloads.map(function(d){return '<a class="btn blue" href="'+esc(d.u)+'" download>'+esc(d.t)+' <span class="arrow">↓</span></a>'}).join('')+'</div>':'')+(safe(S.linkedin)?'<a class="btn ghost on-dark" href="'+esc(S.linkedin)+'" target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a>':'')+'</div>';
+      '<div class="done" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><h3>You are on the list.</h3><p>'+esc(dn)+'</p>'+(S.freeDownloads&&S.freeDownloads.length?'<div class="dl">'+S.freeDownloads.map(function(d){return '<a class="btn blue" href="'+esc(d.u)+'" download>'+esc(d.t)+' <span class="arrow">↓</span></a>'}).join('')+'</div>':'')+(safe(S.linkedin)?'<a class="btn ghost on-dark" href="'+esc(S.linkedin)+'" target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a>':'')+'</div>';
     var f=$('form',fb),er=$('.err',fb),bt=$('button',fb);
     f.addEventListener('submit',function(ev){
       ev.preventDefault();er.hidden=true;
