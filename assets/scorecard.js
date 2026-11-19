@@ -25,7 +25,7 @@
     if(s>=21)return['Laying foundations','The basics are forming. Focus on one or two skills for the next 30 days and the gains will show.'];
     return['Getting started','This is a normal place to begin. Pick one skill, run a small experiment this week, and re-score in 30 days.'];
   }
-  function rec(k){var m={'Money habits':'Start with The Ten-Year You workbook: it turns money and career goals into a plan you check every Friday.','Learning speed':'Start with The Ten-Year You workbook, with its weekly Friday audits that turn experience into learning.','Network':'Start with the CV and LinkedIn Kit, then use its message templates to reach three new people this month.'};return m[k]||'Start with the 90-Day Trust Build workbook: week-by-week moves and scripts for '+k.toLowerCase()+'. The Starter Bundle includes it and four more tools for '+(window.GZ_OFFER&&window.GZ_OFFER.open?'KES 1,990 at the founding price':'KES 2,900')+'.'}
+  function rec(k){var m={'Money habits':'Start with The Career Compass workbook: it turns money and career goals into a plan you check every Friday.','Learning speed':'Start with The Ten-Year You workbook, with its weekly Friday audits that turn experience into learning.','Network':'Start with the CV and LinkedIn Kit, then use its message templates to reach three new people this month.'};return m[k]||'Start with the 90-Day Trust Build workbook: week-by-week moves and scripts for '+k.toLowerCase()+'. The Starter Bundle includes it and four more tools for '+(window.GZ_OFFER&&window.GZ_OFFER.open?'KES 1,990 at the founding price':'KES 2,900')+'.'}
   function done(){
     var s=A.reduce(function(a,b){return a+b},0),b=band(s);
     var rank=Q.map(function(q,n){return{k:q.k,v:A[n],tip:q.tip}}).sort(function(x,y){return x.v-y.v});
