@@ -760,3 +760,5 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .capband{position:relative}
 .mist+.dark,.mist+.capband{--wv:#F1F7FC}
 @media(prefers-reduced-motion:reduce){.hero .fl{animation:none}.route .rp{stroke-dashoffset:0}.route .pins circle,.route .flag{opacity:1;transform:none}.checks.rv li{opacity:1;transform:none}.ladder.path::after{width:92%}}
+
+.locked{display:flex;gap:10px;align-items:center;margin:0!important;padding:14px 18px;border:1.5px dashed var(--line);border-radius:14px;color:var(--muted);font-weight:500;background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(124,196,232,.07) 10px 20px)}
