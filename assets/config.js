@@ -22,6 +22,8 @@ var SITE = {
   payRegular: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "", planner: "", meetings: "", strategy: "", budget: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
   // MailerLite: paste the form action URL from your MailerLite embedded form (https://assets.mailerlite.com/jsonp/ACCOUNT/forms/FORMID/subscribe). Leave empty until ready.
   mailerliteAction: "https://assets.mailerlite.com/jsonp/2809345/forms/204567460482909852/subscribe",
+  // Ask Ishaq form (Google Form). Paste the formResponse URL and the entry ids. Empty = opens the visitor's email app instead.
+  ask: { action: "", fields: { type: "", message: "", name: "", email: "", feature: "" } },
   giftUrl: "",
   pledgeUrl: "",
   contactEmail: "ishaq.kassam@gmail.com",

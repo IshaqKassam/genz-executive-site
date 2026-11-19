@@ -109,6 +109,42 @@
     });
   });
 
+
+  /* Ask Ishaq: question / idea / case scenario */
+  var ab=$('#askbox');
+  if(ab){
+    var A=S.ask||{},AF=A.fields||{},aact=safe(A.action);
+    var types=['A question','An idea for a post','A case scenario'];
+    var tchips=types.map(function(v,i){return '<label class="chip"><input type="radio" name="t" value="'+v+'"'+(i===0?' checked':'')+'><span>'+v+'</span></label>'}).join('');
+    ab.innerHTML='<form class="capture" novalidate><fieldset><legend>I am sending</legend><div class="chips">'+tchips+'</div></fieldset>'+
+      '<label>Your message<textarea name="m" rows="6" maxlength="2000" placeholder="Keep it short and specific. For a case scenario, leave out names and say what made it hard." required></textarea></label>'+
+      '<div class="row2"><label>Name (optional)<input name="n" autocomplete="name"></label><label>Email (optional, only if you want a reply)<input type="email" name="e" autocomplete="email"></label></div>'+
+      '<label class="consent"><input type="checkbox" name="f"><span>You may use my message in a post, guide or newsletter. Remove my name and any details that identify me or others.</span></label>'+
+      '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+      '<p class="err" role="alert" hidden></p><button class="btn blue" type="submit">Send to Ishaq <span class="arrow">→</span></button>'+
+      '<p class="fine">I read every message. Your name and email are never shared.</p></form>'+
+      '<div class="done" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><h3>Thank you. It is in.</h3><p>If it becomes a post or a guide, you will see it on the blog.</p></div>';
+    var af=$('form',ab),aer=$('.err',ab),abt=$('button',af);
+    af.addEventListener('submit',function(ev){
+      ev.preventDefault();aer.hidden=true;
+      if(af.website.value)return;
+      var msg=af.m.value.trim(),em=af.e.value.trim(),ty=($('input[name=t]:checked',af)||{}).value||types[0];
+      if(msg.length<10){aer.textContent='Please write a little more so I can help.';aer.hidden=false;return}
+      if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){aer.textContent='That email does not look right. Leave it empty if you prefer.';aer.hidden=false;return}
+      var ok=function(){af.hidden=true;$('.done',ab).hidden=false};
+      if(aact){
+        var p=new URLSearchParams();p.append(AF.type,ty);p.append(AF.message,msg);
+        if(AF.name&&af.n.value.trim())p.append(AF.name,af.n.value.trim());
+        if(AF.email&&em)p.append(AF.email,em);
+        if(AF.feature)p.append(AF.feature,af.f.checked?'Yes, anonymised':'No, keep private');
+        abt.disabled=true;abt.classList.add('busy');
+        fetch(aact,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).then(ok).catch(function(){abt.disabled=false;abt.classList.remove('busy');aer.textContent='Something went wrong. Please try again.';aer.hidden=false});
+      }else if(S.contactEmail){
+        location.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent('Ask Ishaq: '+ty)+'&body='+encodeURIComponent(msg+'\n\nName: '+af.n.value.trim()+'\nMay be used anonymously: '+(af.f.checked?'Yes':'No'));ok();
+      }else{aer.textContent='Sending opens very soon.';aer.hidden=false}
+    });
+  }
+
   /* proof (renders only what is real) */
   var pf=$('#proof');
   if(pf){
@@ -156,4 +192,3 @@ w.addEventListener('mousemove',function(e){var r=w.getBoundingClientRect(),x=(e.
 w.addEventListener('mouseleave',function(){bk.style.transform='';bk.style.animation=''});
 }catch(e){}})();
 
-(function(){try{var S=window.SITE||{};if(!S.contactEmail&&!S.linkedin){var a=document.querySelector('footer .js-email');var col=a&&a.closest('.cols>div');if(col)col.style.display='none'}}catch(e){}})();

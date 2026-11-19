@@ -841,3 +841,9 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 @media(prefers-reduced-motion:reduce){.brainsvg .bp{animation:none;stroke-dashoffset:0}}
 @media(max-width:980px){.rules{grid-template-columns:repeat(2,1fr)}.tabpanel,.ucs,.steps6{grid-template-columns:1fr 1fr}.plan4{grid-template-columns:1fr 1fr}.wfs{grid-template-columns:1fr}}
 @media(max-width:640px){.rules,.tabpanel,.ucs,.steps6,.plan4{grid-template-columns:1fr}.prm{padding-right:18px;padding-bottom:56px}.cp{top:auto;bottom:12px}}
+
+/* Ask Ishaq */
+.capture textarea{width:100%;min-height:150px;border-radius:14px;border:1px solid rgba(255,255,255,.22);background:rgba(10,24,36,.55);color:#fff;padding:14px 16px;font:500 17px/1.5 'Figtree',sans-serif;resize:vertical}
+.capture textarea:focus{outline:0;border-color:var(--sky);box-shadow:0 0 0 4px rgba(124,196,232,.25)}
+.capture textarea::placeholder,.capture input::placeholder{color:#8FB2CB}
+.capband .perks b{color:#fff}
