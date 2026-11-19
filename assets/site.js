@@ -137,6 +137,8 @@
   var li=safe(S.linkedin);
   $$('.js-linkedin').forEach(function(a){if(li){a.href=li;a.target='_blank';a.rel='noopener noreferrer'}else{a.style.display='none'}});
   $$('.js-email').forEach(function(a){if(S.contactEmail){a.href='mailto:'+S.contactEmail;a.textContent=S.contactEmail}else{a.style.display='none'}});
+  $$('.js-support').forEach(function(a){if(S.supportUrl){a.href=S.supportUrl;a.target='_blank';a.rel='noopener'}else if(S.contactEmail){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent('A coffee for Ishaq')+'&body='+encodeURIComponent('Hello Ishaq,\n\nI would like to buy you a coffee. Please send me the details.\n')}else{a.style.display='none'}});
+  $$('.js-org').forEach(function(a){if(S.contactEmail){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent('Sponsor enquiry')}else{a.style.display='none'}});
   $$('.js-enquiry').forEach(function(a){if(S.contactEmail&&a.getAttribute('data-subject')){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent(a.getAttribute('data-subject'))+'&body='+encodeURIComponent(a.getAttribute('data-body')||'');return}if(S.contactEmail){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent('Speaking enquiry')+'&body='+encodeURIComponent('Hello Ishaq,\n\nEvent and organisation:\nAudience and size:\nPreferred date and place (or online):\nFormat (keynote, workshop, panel):\n\nThank you,\n')}else{a.style.display='none'}});
   var yr=$('#yr');if(yr)yr.textContent=new Date().getFullYear();
 

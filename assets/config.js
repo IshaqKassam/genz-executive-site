@@ -23,6 +23,7 @@ var SITE = {
   // MailerLite: paste the form action URL from your MailerLite embedded form (https://assets.mailerlite.com/jsonp/ACCOUNT/forms/FORMID/subscribe). Leave empty until ready.
   mailerliteAction: "",
   contactEmail: "ishaq.kassam@gmail.com",
+  supportUrl:"",
   linkedin: "",
   deliveryPromise: "Your files are emailed to you within one working day of payment."
 };
