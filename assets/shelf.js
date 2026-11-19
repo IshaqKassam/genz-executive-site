@@ -242,6 +242,7 @@ var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&
 function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function short(t){return t.split(':')[0].replace(/^The /,'The ')}
 var COVERS={"0":12539702,"2":10079937,"3":746414,"4":14445208,"5":7438753,"7":9130310,"8":9621492,"9":258839,"10":545660,"11":7244512,"12":291037,"13":10313767,"14":5359889,"16":9215292,"17":863960,"18":12132013,"21":10021591,"22":10540658,"23":9142137,"24":7318893,"25":7988607,"27":109288,"28":11041932,"29":94285,"30":8735137,"31":405381,"32":953474,"33":7822953,"34":10545545,"35":13314878,"36":1711809,"37":8365942,"38":7004880,"39":7284188,"40":8088432,"41":1359485,"42":2555094,"43":10105591,"44":4280640,"45":10873292,"46":9277845,"48":12835042,"49":8246311,"50":6430258,"51":421244,"52":6713257,"54":13563174,"55":6804076,"56":7970492,"57":9617353,"58":7104760,"59":6675500,"60":9254540,"65":4849549,"66":10389354,"67":6305971,"68":10491331,"69":8315603,"70":6434817,"71":8792782,"72":13290711,"74":580952,"76":4210225,"77":528333,"79":15226155,"80":9274687,"81":11968134,"82":7259486,"83":5415827,"84":12816943,"85":8294078,"86":167337,"87":11990983,"88":1128787,"90":12702407,"91":8818268,"92":8858487,"93":10324820,"94":8788773,"95":12374726,"96":14875135,"98":15104803,"99":8082607,"101":9674166,"102":421933,"103":211529,"104":12593945,"106":14390312,"108":6528920,"109":8915879,"110":6379595,"111":95974,"112":14910538,"113":8242787,"114":143180,"115":14943926,"117":207760,"118":11555264,"119":15264468,"120":10285896,"121":4779243,"122":14837267,"123":443668,"127":691116,"130":2304534,"131":15264383,"132":873153,"134":13583209,"135":10721468,"136":117973,"140":13690498,"141":723742,"143":935332,"144":4054641,"146":4935861,"149":10235696,"150":9933330,"151":4143892,"152":12428577,"153":31848,"155":11041481,"156":8455466,"158":2469390,"160":8236222,"161":8889204,"163":13240411,"164":9022521,"165":9779,"167":6603928,"168":473972,"169":9311561,"170":728395,"171":8353059,"172":8510188,"173":11603934,"175":1155694,"177":426073,"180":581675,"182":4295433,"183":15183762,"187":10521439,"188":9267223,"189":872432,"190":7182819,"191":8281954,"192":7420452,"193":7771038,"194":14351077,"195":14627509,"196":8240407,"197":7418786,"198":15267110,"199":8221267,"200":13301713,"201":1048892,"202":12721865,"203":10876521,"205":12621906,"206":8231823,"207":11261770,"208":998256,"209":9278292,"210":10544254,"211":4443189,"212":9273490,"213":575114,"214":103629,"215":5992814,"217":9220063,"218":9321656,"220":548549,"221":99306,"222":656851,"223":10320409,"224":8520820,"225":440215,"226":121255,"227":13281409,"228":473593,"229":6509543,"230":8241328,"231":9334801,"1":11203708,"19":10333393,"20":8782615,"26":7285986,"47":4941284,"53":864069,"61":10678412,"73":8237054,"75":7999309,"78":13264962,"89":2304859,"97":13250350,"107":11360422,"124":817031,"137":9679316,"162":7125465,"174":8289774,"176":509607,"181":8866107,"204":14546467,"216":13846974};
+var OK={};
 function covUrl(ix,sz){var c=COVERS[ix];return c?"https://covers.openlibrary.org/b/id/"+c+"-"+(sz||"M")+".jpg":""}
 var room=document.getElementById('shelfRoom'),f=document.getElementById('shelfFilters'),cnt=document.getElementById('shelfCount'),sb=document.getElementById('shelfSearch');
 /* ---------- hero spine strip ---------- */
@@ -279,13 +280,13 @@ function build(){
   SHELVES.forEach(function(name,si){
     var list=items.filter(function(it){return it.shelf===si});
     var rows=[],row=[],used=0;
-    list.forEach(function(it){var w=(state.covers&&COVERS[it.ix]?84:it.w)*u+gap;if(used+w>W&&row.length){rows.push(row);row=[];used=0}row.push(it);used+=w});
+    list.forEach(function(it){var w=(state.covers&&OK[it.ix]?84:it.w)*u+gap;if(used+w>W&&row.length){rows.push(row);row=[];used=0}row.push(it);used+=w});
     if(row.length)rows.push(row);
     html+='<section class="unit" data-s="'+si+'" aria-label="'+esc(name)+'"><header class="plate"><span class="brass"><b>'+esc(name)+'</b><em>'+list.length+' books</em></span></header><div class="case">';
     rows.forEach(function(r,ri){
       html+='<div class="row">';
       r.forEach(function(it,k){
-        var cvm=state.covers&&COVERS[it.ix];var st='--w:'+(cvm?84:it.w)+';--h:'+(cvm?126:it.h)+';'+(cvm?'--img:url('+covUrl(it.ix)+');':'')+'--c:hsl('+it.hue+' '+it.sat+'% '+it.lig+'%);--c2:hsl('+it.hue+' '+it.sat+'% '+(it.lig+9)+'%);--lean:'+it.lean+'deg;--d:'+((ri*6+k)*26)+'ms';
+        var cvm=state.covers&&OK[it.ix];var st='--w:'+(cvm?84:it.w)+';--h:'+(cvm?126:it.h)+';'+(cvm?'--img:url('+covUrl(it.ix)+');':'')+'--c:hsl('+it.hue+' '+it.sat+'% '+it.lig+'%);--c2:hsl('+it.hue+' '+it.sat+'% '+(it.lig+9)+'%);--lean:'+it.lean+'deg;--d:'+((ri*6+k)*26)+'ms';
         html+='<button class="sp f'+it.font+(cvm?' cvr':'')+(it.start?' st':'')+(it.read?' rd':'')+'" data-i="'+it.ix+'" style="'+st+'" aria-label="'+esc(it.title+' by '+it.author)+'"><span class="t">'+esc(short(it.title).replace(/’/g,"'"))+'</span><span class="a">'+esc(it.author.split(' and ')[0].split(' ').slice(-1)[0])+'</span>'+(it.start?'<span class="star">★</span>':'')+(it.read?'<span class="rib"></span>':'')+'</button>';
       });
       if(ri===rows.length-1&&si%3===0)html+='<span class="prop plant" aria-hidden="true"></span>';
@@ -385,5 +386,11 @@ modal.addEventListener('click',function(e){
 document.addEventListener('keydown',function(e){if(modal.hidden)return;if(e.key==='Escape')closeBook();else if(e.key==='ArrowRight')step(1);else if(e.key==='ArrowLeft')step(-1);else if(e.key==='Tab'){var fs=[].slice.call(modal.querySelectorAll('button,a[href]')).filter(function(x){return x.offsetParent});var i=fs.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();fs[fs.length-1].focus()}else if(!e.shiftKey&&i===fs.length-1){e.preventDefault();fs[0].focus()}}});
 /* ---------- boot ---------- */
 build();
+/* preload the real covers, then show them by default; a cover that fails to load keeps its spine */
+(function(){var ids=Object.keys(COVERS),left=ids.length,done=false,t;
+  function fin(){if(done)return;done=true;clearTimeout(t);if(!Object.keys(OK).length)return;state.covers=true;var b=f.querySelector('.covbtn');if(b){b.classList.add('on');b.textContent='Show spines ▥'}room.classList.add('covers');build()}
+  t=setTimeout(fin,9000);
+  ids.forEach(function(k){var i=new Image();i.onload=function(){if(i.naturalWidth>40)OK[k]=1;if(--left===0)fin()};i.onerror=function(){if(--left===0)fin()};i.src=covUrl(k)});
+})();
 var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(Math.abs(room.clientWidth-lastW)>40){build()}},180)});
 })();
