@@ -20,6 +20,15 @@ if(tl2){var tick=function(){var r=tl2.getBoundingClientRect(),p=(innerHeight*.6-
 /* observe stack */
 var sw=document.querySelector('.stackwrap');
 if(sw){if('IntersectionObserver' in window){var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sw.classList.add('in');so.disconnect()}})},{threshold:.3});so.observe(sw)}else sw.classList.add('in')}
+
+/* ===== site-wide visual layer ===== */
+document.querySelectorAll('.hero').forEach(function(h){if(h.querySelector('.fl'))return;['a','b','c','sq'].forEach(function(k){var i=document.createElement('i');i.className='fl '+k;i.setAttribute('aria-hidden','true');h.insertBefore(i,h.firstChild)})});
+var rt=document.querySelector('.route');
+if(rt){if('IntersectionObserver' in window&&!reduce){var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){rt.classList.add('go');ro.disconnect()}})},{threshold:.25});ro.observe(rt)}else rt.classList.add('go')}
+var lp=document.querySelector('.ladder.path');
+if(lp){var lis2=[].slice.call(lp.children);
+  var lo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){lis2.forEach(function(l,i){setTimeout(function(){l.classList.add('lit');lp.style.setProperty('--pp',((i+1)/lis2.length).toFixed(2))},reduce?0:i*380)});lo.disconnect()}})},{threshold:.35});lo.observe(lp)}
+document.querySelectorAll('.dark,.capband,.statement').forEach(function(s){s.classList.add('glowfx');if(fine)s.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();s.style.setProperty('--gx',(e.clientX-r.left)+'px');s.style.setProperty('--gy',(e.clientY-r.top)+'px')})});
 if(reduce||!fine)return;
 /* spotlight + tilt on cards */
 document.querySelectorAll('.card,.prod,.pcard,.freeband').forEach(function(c){
