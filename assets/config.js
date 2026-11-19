@@ -17,6 +17,8 @@ var SITE = {
   freeDownloads: [{t:'Download the free First 90 Days Checklist', u:'downloads/first-90-days-checklist.pdf'},{t:'Download the free Executive Scorecard', u:'downloads/genz-executive-scorecard.pdf'}],
   // Payment links from Paystack (or IntaSend). One per product. "" = Opening soon.
   pay: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "" },
+  offer: { ends: "2027-02-28T23:59:59+03:00" },
+  payRegular: { bundle: "", wb90: "", wb10: "", cvkit: "", jour: "" },
   contactEmail: "ishaq.kassam@gmail.com",
   linkedin: "",
   deliveryPromise: "Your files are emailed to you within one working day of payment."
