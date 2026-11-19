@@ -471,3 +471,6 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .shelfcta p{margin:0;max-width:640px;color:rgba(255,255,255,.78)}
 @media(max-width:1000px){.bkgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.bkgrid{grid-template-columns:1fr}.shelfcta{padding:26px 22px}}
+
+/* Bookshelf search */
+.shelfsearch{margin:18px 0 10px}.shelfsearch input{width:100%;max-width:460px;padding:13px 16px;border:1.5px solid #C3D9E9;border-radius:12px;font:inherit;font-size:1rem;background:#fff;color:#0F2233}.shelfsearch input:focus{outline:3px solid #7CC4E8;outline-offset:1px;border-color:#3BA3DB}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
