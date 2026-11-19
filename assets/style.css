@@ -847,3 +847,26 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .capture textarea:focus{outline:0;border-color:var(--sky);box-shadow:0 0 0 4px rgba(124,196,232,.25)}
 .capture textarea::placeholder,.capture input::placeholder{color:#8FB2CB}
 .capband .perks b{color:#fff}
+
+/* on-site checkout */
+.colock{overflow:hidden}
+.cobox{position:fixed;inset:0;z-index:200;background:rgba(10,24,36,.62);display:grid;place-items:center;padding:16px;overflow:auto}
+.cobox[hidden]{display:none}
+.cobody{position:relative;width:min(460px,100%);background:#fff;border-radius:var(--r);padding:32px 30px 26px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.cobody h3{font-size:24px;margin:0 28px 6px 0}
+.coprice{margin:0 0 18px;color:var(--muted);font-size:16px}
+.coclose{position:absolute;top:12px;right:14px;width:38px;height:38px;border:0;border-radius:50%;background:var(--mist);color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
+.cobody label{display:block;font:600 15px 'Figtree',sans-serif;margin-bottom:6px}
+.cobody input[type=email]{width:100%;font:17px 'Figtree',sans-serif;padding:15px 16px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink)}
+.cobody input[type=email]:focus{border-color:var(--bright);outline:0}
+.cobody .btn{width:100%;margin-top:14px}
+.cobody .btn:disabled{opacity:.6;cursor:progress}
+.coerr{margin:8px 0 0;color:#B3261E;font-size:15px}
+.conote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.dl{display:grid;gap:12px;margin:26px 0 0;padding:0;list-style:none}
+.dl li{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.dl li span{font-weight:600;word-break:break-word}
+.dl .btn{padding:12px 20px;font-size:15px}
+.thanksbox{max-width:680px}
+.thanksbox form{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.thanksbox input[type=text]{flex:1 1 240px;font:17px 'Figtree',sans-serif;padding:14px 16px;border:2px solid var(--line);border-radius:14px}

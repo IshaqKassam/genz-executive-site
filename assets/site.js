@@ -61,16 +61,73 @@
     {id:'scorecards',f:790,r:1200,who:'For: turning opinions into numbers you can act on.',k:'Excel workbook',t:'Scorecard Toolkit',d:'Six scorecards: your executive skills, first 90 days, projects, team KPIs, suppliers and your quarter, with automatic scoring and red, amber, green flags.',
       inside:['Executive scorecard: eight skills, strongest skill, focus and chart','30-60-90 weighted scorecard for a new role','Project scorecard with an overall status','Team KPI scorecard that handles lower-is-better measures','Supplier scorecard with ranking','Quarterly review with evidence']}
   ];
+  var CO=S.checkout||{},coOn=!!(CO.paystackKey&&safe(CO.worker));
   var card=function(x,i){
     var u=safe((isOpen?(S.pay||{}):(S.payRegular||{}))[x.id]);
-    var btn=u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':(S.contactEmail?'<a class="btn" href="mailto:'+esc(S.contactEmail)+'?subject='+encodeURIComponent('Order: '+x.t)+'&body='+encodeURIComponent('Hello Ishaq,\n\nI would like to order: '+x.t+' (KES '+(isOpen?x.f:x.r).toLocaleString('en-US')+(isOpen?', founding price':'')+').\n\nName:\nPhone number:\n\nPlease send me the payment details.\n')+'">Order now <span class="arrow">→</span></a>':'<a class="btn" href="index.html#join">Reserve my copy <span class="arrow">→</span></a>');
+    var btn=coOn?'<button type="button" class="btn" data-buy="'+x.id+'">Buy now <span class="arrow">→</span></button>':u?'<a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">Buy now <span class="arrow">→</span></a>':(S.contactEmail?'<a class="btn" href="mailto:'+esc(S.contactEmail)+'?subject='+encodeURIComponent('Order: '+x.t)+'&body='+encodeURIComponent('Hello Ishaq,\n\nI would like to order: '+x.t+' (KES '+(isOpen?x.f:x.r).toLocaleString('en-US')+(isOpen?', founding price':'')+').\n\nName:\nPhone number:\n\nPlease send me the payment details.\n')+'">Order now <span class="arrow">→</span></a>':'<a class="btn" href="index.html#join">Reserve my copy <span class="arrow">→</span></a>');
     var badge=isOpen?'Founding price':(x.hot?'Best value':'');
     var p=isOpen?x.f:x.r;
     return '<article data-p="'+x.id+'" class="prod rv d'+(i%3)+(x.hot?' hot':'')+'"><span class="cover">'+C[x.id]+'</span><div class="body">'+(badge?'<span class="badge">'+esc(badge)+'</span>':'')+'<span class="k">'+esc(x.k)+'</span><h3>'+esc(x.t)+'</h3><p>'+esc(x.d)+'</p>'+(x.who?'<p class="who">'+esc(x.who)+'</p>':'')+'<div class="price">'+esc(fmt(p))+' <small>one-off</small>'+(x.v?'<s>'+esc(fmt(x.v))+' if bought separately</s>':(isOpen?'<s>'+esc(fmt(x.r))+' regular price</s>':''))+'</div>'+(x.v?'<p class="urgency save">You save '+esc(fmt(x.v-p))+' ('+Math.round((x.v-p)/x.v*100)+'% off)'+(isOpen?' · founding price until '+esc(endsText):'')+'</p>':(isOpen?'<p class="urgency">Save '+esc(fmt(x.r-x.f))+' until '+esc(endsText)+'</p>':''))+(x.inside?'<details class="inside"><summary>What is inside</summary><ul>'+x.inside.map(function(i){return '<li>'+esc(i)+'</li>'}).join('')+'</ul></details>':'')+btn+'</div></article>';
   };
   var grid=$('#shopgrid');
   if(grid){var lim=+grid.getAttribute('data-limit')||PRODS.length;grid.innerHTML=PRODS.slice(0,lim).map(card).join('')}
-  var dv=$('#deliver');if(dv)dv.textContent=S.deliveryPromise||'';
+  var dv=$('#deliver');if(dv)dv.textContent=coOn?'Your files are ready to download the moment payment is confirmed, and Paystack emails you a receipt.':(S.deliveryPromise||'');
+
+  /* on-site checkout: Paystack popup, then thanks.html collects the files from the payments Worker */
+  if(coOn){
+    var hw=$$('.how > div');
+    if(hw.length===3){
+      hw[0].innerHTML='<h3>Pick a tool, tap Buy now</h3><p>Enter your email, then pay with M-Pesa or card in a secure Paystack window. You never leave this page.</p>';
+      hw[1].innerHTML='<h3>Download straight away</h3><p>The moment your payment is confirmed you land on your download page. Paystack also emails you a receipt.</p>';
+    }
+    $$('.faq details').forEach(function(d){
+      var q=$('summary',d);if(q&&/How long until I receive/i.test(q.textContent)){var pp=$('p',d);if(pp)pp.textContent='Straight away. Once your payment is confirmed you are taken to a page where you can download your files. If anything goes wrong, write to us and we will sort it out the same day.'}
+    });
+    var byId={};PRODS.forEach(function(p){byId[p.id]=p});
+    var modal,cur,last,busy=false;
+    var loadPay=function(cb){
+      if(window.PaystackPop)return cb();
+      var sc=document.createElement('script');sc.src='https://js.paystack.co/v2/inline.js';sc.onload=function(){cb()};sc.onerror=function(){cb(new Error('load'))};document.head.appendChild(sc);
+    };
+    var close=function(){if(!modal)return;modal.hidden=true;document.body.classList.remove('colock');if(last&&last.focus)last.focus()};
+    var err=function(m){var e=$('.coerr',modal);e.textContent=m;e.hidden=!m};
+    var mk=function(){
+      if(modal)return modal;
+      modal=document.createElement('div');modal.className='cobox';modal.hidden=true;modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-labelledby','co-t');
+      modal.innerHTML='<div class="cobody"><button type="button" class="coclose" aria-label="Close">&times;</button><h3 id="co-t"></h3><p class="coprice"></p><form novalidate><label for="co-e">Email for your receipt and files</label><input id="co-e" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><p class="coerr" role="alert" hidden></p><button class="btn blue" type="submit">Pay securely <span class="arrow">→</span></button></form><p class="conote">Pay by M-Pesa or card. Paystack handles the payment, so we never see your card or M-Pesa details. By paying you agree to the <a href="terms.html" target="_blank" rel="noopener">terms and refunds</a>.</p></div>';
+      document.body.appendChild(modal);
+      $('.coclose',modal).addEventListener('click',close);
+      modal.addEventListener('click',function(e){if(e.target===modal)close()});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)close()});
+      $('form',modal).addEventListener('submit',function(e){
+        e.preventDefault();if(busy||!cur)return;
+        var email=$('#co-e',modal).value.trim();
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){err('Please enter a valid email address.');return}
+        err('');busy=true;var btn=$('button[type=submit]',modal);btn.disabled=true;
+        var price=isOpen?cur.f:cur.r,rnd=(window.crypto&&crypto.getRandomValues)?[].slice.call(crypto.getRandomValues(new Uint8Array(6))).map(function(b){return b.toString(16).padStart(2,'0')}).join(''):String(Math.random()).slice(2,14);
+        var ref='GZ'+Date.now().toString(36)+rnd,done=function(){busy=false;btn.disabled=false};
+        loadPay(function(le){
+          if(le||!window.PaystackPop){done();err('We could not load the payment window. Check your connection and try again.');return}
+          try{
+            new window.PaystackPop().newTransaction({
+              key:CO.paystackKey,email:email,amount:price*100,currency:'KES',reference:ref,
+              metadata:{product:cur.id,site:'genzexecutive.com',custom_fields:[{display_name:'Product',variable_name:'product',value:cur.t}]},
+              onSuccess:function(t){location.href='thanks.html?ref='+encodeURIComponent((t&&t.reference)||ref)},
+              onCancel:function(){done()},
+              onError:function(){done();err('The payment window could not open. Please try again.')}
+            });
+          }catch(x){done();err('The payment window could not open. Please try again.')}
+        });
+      });
+      return modal;
+    };
+    document.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('[data-buy]');if(!b)return;
+      e.preventDefault();var p=byId[b.getAttribute('data-buy')];if(!p)return;
+      var m=mk();cur=p;last=b;$('#co-t',m).textContent=p.t;$('.coprice',m).textContent=fmt(isOpen?p.f:p.r)+' · one-off · digital files';err('');
+      m.hidden=false;document.body.classList.add('colock');setTimeout(function(){$('#co-e',m).focus()},40);
+    });
+  }
 
   /* form: native branded capture posting to the Google Form */
   var F=S.formFields||{};
