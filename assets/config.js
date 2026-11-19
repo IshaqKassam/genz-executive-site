@@ -7,7 +7,7 @@ var SITE = {
   formShareUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeDewFssSMWpReHmBfYqtIWw0OdwnSO_G3owgUp5Aa3DUNFdw/viewform",
   // Native branded sign-up posts straight into the same Google Form / Sheet.
   formAction: "https://docs.google.com/forms/d/e/1FAIpQLSeDewFssSMWpReHmBfYqtIWw0OdwnSO_G3owgUp5Aa3DUNFdw/formResponse",
-  formFields: { name: "entry.1154333394", email: "entry.1809294512", interests: "entry.1470187448", career: "entry.188387492", source:"", /* paste the entry.XXXX id of a short-answer question named Source to record which page each sign-up came from */
+  formFields: { name: "entry.1154333394", email: "entry.1809294512", interests: "entry.1470187448", career: "entry.188387492", source:"entry.2129233736", /* paste the entry.XXXX id of a short-answer question named Source to record which page each sign-up came from */
     consent: "entry.280203674" },
   consentText: "I agree to be emailed about The GenZ Executive. I can ask to be removed at any time.",
   // Proof. Leave empty until real; the section stays hidden. Each testimonial: {q:"quote", n:"Name", r:"Role, Organisation"}. Only add with written permission.
