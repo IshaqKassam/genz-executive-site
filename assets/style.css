@@ -945,3 +945,13 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 @media(prefers-reduced-motion:reduce){.cr,.gf-mods li{opacity:1!important;transform:none!important}.ct i{transition:none}.cmpchart .cb{width:var(--b)}.cmpchart .ca{width:var(--a)}}
 @media(max-width:600px){.cr{grid-template-columns:78px 1fr}}
 .cmpchart .eyebrow{color:#1668A0}
+
+/* Stats context, Nov 2026 */
+.strip .striphead{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:30px 0 6px;border-bottom:1px solid rgba(255,255,255,.12)}
+.strip .skick{font:700 12px 'Figtree',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7CC4E8}
+.strip .striphead p{margin:6px 0 0;color:#C9DBE8;font-size:17px;max-width:560px}
+.strip .striphead a{color:#fff;font-weight:700;text-decoration:none;border-bottom:2px solid #7CC4E8;padding-bottom:2px}
+.strip .it{padding-top:26px}
+.strip .it span{display:block;font:700 17px 'Schibsted Grotesk',sans-serif;color:#fff;margin-top:8px}
+.strip .it em{display:block;font-style:normal;font-size:14px;line-height:1.5;color:#B4CADA;margin-top:6px;max-width:230px}
+@media(max-width:860px){.strip .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.strip .it:nth-child(even){border-left:0;padding-left:0}.strip .it:nth-child(odd){padding-left:22px}}
