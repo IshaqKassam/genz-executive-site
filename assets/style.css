@@ -885,3 +885,16 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .pricing .card p{color:#44586a}
 .gravhero .archkey{gap:8px 14px;font-size:13px}
 .gravhero .archkey{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:8px 18px}
+
+/* Gravitas sample and fit (Nov 2026) */
+.trybox{padding:26px}.tryq{font-size:18px;margin:6px 0 14px;color:var(--navy,#0F2233)}
+.tryopt{display:block;width:100%;text-align:left;background:#fff;border:1px solid #dbe6ef;border-radius:12px;padding:12px 14px;margin-top:8px;font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
+.tryopt:hover{border-color:#1668A0}.tryopt.picked{border-color:#1668A0;background:#e3f0f8}.tryopt.best{border-color:#1c7c54;background:#e3f4ec}
+.tryfb{border-left:3px solid #dbe6ef;padding:8px 12px;margin:6px 0 0;border-radius:0 8px 8px 0;background:#f3f8fc;font-size:15px}.tryfb.good{border-color:#1c7c54;background:#e3f4ec}
+.trysec{padding:72px 0}.fit .cards.two{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:24px}
+@media(max-width:760px){.fit .cards.two{grid-template-columns:1fr}}
+.checks.no li::before{content:"\00D7";color:#b3402f}.who{margin-top:26px;padding:18px 22px;background:#fff;border-left:4px solid #1668A0;border-radius:0 12px 12px 0}
+
+.nolist{list-style:none;padding:0;margin:14px 0 0}.nolist li{position:relative;padding:0 0 12px 36px;color:var(--muted,#52667a)}
+.nolist li::before{content:"\00D7";position:absolute;left:0;top:-2px;width:24px;height:24px;border-radius:50%;background:#f6e3df;color:#b3402f;font-weight:700;text-align:center;line-height:24px}
+.trybox .tryq{color:#0F2233!important;font-weight:500}

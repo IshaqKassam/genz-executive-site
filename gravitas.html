@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20261120c">
+<link rel="stylesheet" href="assets/style.css?v=20261120d">
 <script src="assets/config.js?v=20261120b"></script>
 </head>
 <body>
@@ -109,6 +109,37 @@
 <article class="card rv d2"><span class="num">07</span><span class="qi"><svg class="ico2" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle pathLength="1" cx="32" cy="12" r="6"/><path pathLength="1" d="M32 20v26M20 28h24M26 58l6-12 6 12"/></svg></span><span class="ptag">Personal &middot; private</span><h3>Bearing</h3><p class="mlead">Carry yourself with confidence</p><p><b>You can show:</b> A private card of changes you chose.</p></article>
 <article class="card rv d3"><span class="num">08</span><span class="qi"><svg class="ico2" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M8 12h20a4 4 0 0 1 4 4v38a6 6 0 0 0-6-6H8zM56 12H36a4 4 0 0 0-4 4v38a6 6 0 0 1 6-6h18z"/></svg></span><span class="ptag">Personal &middot; private</span><h3>Habits</h3><p class="mlead">Build the daily practices</p><p><b>You can show:</b> A private card of habits you will keep.</p></article>
     </div>
+  </div>
+</section>
+<section class="trysec" id="try">
+  <div class="wrap split">
+    <div>
+      <span class="kick rv">Try a real session</span>
+      <h2 class="rv d1">Here is what twenty minutes <span class="serif">feels like.</span></h2>
+      <p class="sub rv d2">This is the Decide step from session 3.1, &ldquo;Point first&rdquo;. In the program you also get the lesson, a task, a template and a reflection.</p>
+    </div>
+    <div class="card rv d2 trybox" id="trybox">
+      <p class="eyebrow">Scenario</p>
+      <p class="tryq">Brian emails his manager: &ldquo;Hope you are well. I was reviewing the delivery schedule and noticed a few things, and thought we might discuss&hellip;&rdquo; What is the best rewrite of the opening?</p>
+      <button class="tryopt" data-i="0"><span>&ldquo;Following up on our earlier chat about schedules, I have some thoughts to share when time permits.&rdquo;</span></button>
+      <div class="tryfb" hidden>Still no point. The reader must keep reading to learn what he wants.</div>
+      <button class="tryopt" data-i="1"><span>&ldquo;I recommend we move Friday&rsquo;s delivery to Monday. Two drivers are off and it avoids a late penalty.&rdquo;</span></button>
+      <div class="tryfb good" hidden><b>Strongest.</b> The recommendation and reasons come first, so the reader can decide quickly.</div>
+      <button class="tryopt" data-i="2"><span>&ldquo;Quick question about the schedule.&rdquo;</span></button>
+      <div class="tryfb" hidden>Shorter, but it still hides the ask. Say what you recommend.</div>
+      <p class="fine" style="color:var(--muted);margin-top:12px">Not scored. Pick one and see why. Brian is an invented example.</p>
+    </div>
+  </div>
+</section>
+<section class="mist fit" id="fit">
+  <div class="wrap">
+    <span class="kick rv">Is it for you?</span>
+    <h2 class="rv d1">Honest about <span class="serif">who it helps.</span></h2>
+    <div class="cards two">
+      <article class="card rv"><h3>It is for you if</h3><ul class="checks"><li>You want to be taken seriously and get things done, and you are early in your working life or starting again</li><li>You can give twenty minutes a day for a few weeks</li><li>You are willing to write things down and try them at work, in a club or in your own project</li></ul></article>
+      <article class="card rv d1"><h3>It is not for you if</h3><ul class="nolist"><li>You want a promotion, a raise or a job promised. We never promise those</li><li>You want a lecture series to watch. This is short practice, not video</li><li>You want an accredited qualification. The certificate is of completion</li></ul></article>
+    </div>
+    <div class="who rv d2"><b>Who built it.</b> Ishaq Kassam is Chief Commercial Officer at FinSense Africa and the author of The GenZ Executive. Gravitas turns the lessons of that book into short, practical sessions.</div>
   </div>
 </section>
 <section class="dark">
@@ -202,6 +233,10 @@
   </div>
 </footer>
 <a class="btn blue stickycta" href="scorecard.html">Take the free scorecard <span class="arrow">&rarr;</span></a>
+<script>
+(function(){var b=document.getElementById('trybox');if(!b)return;var os=b.querySelectorAll('.tryopt');
+os.forEach(function(o){o.addEventListener('click',function(){os.forEach(function(x){x.classList.remove('picked');if(x.nextElementSibling)x.nextElementSibling.hidden=true});o.classList.add('picked');o.nextElementSibling.hidden=false;var s=b.querySelector('.tryopt[data-i="1"]');s.classList.add('best');s.nextElementSibling.hidden=false})})})();
+</script>
 <script src="assets/site.js?v=20261120b"></script>
 <script src="assets/wow.js?v=20261120b" defer></script>
 </body>
