@@ -13,7 +13,7 @@
     var o=document.createElement('div');o.className='gzpop-back';
     o.innerHTML='<div class="gzpop" role="dialog" aria-modal="true" aria-labelledby="gzpop-t">'+
       '<button type="button" class="gzpop-x" aria-label="Close">&times;</button>'+
-      '<span class="gzpop-k">Founding circle &middot; free</span>'+
+      '<span class="gzpop-k">Founding circle</span>'+
       '<h2 id="gzpop-t">Register early. <span class="serif">Be first through the door.</span></h2>'+
       '<p>Join the free founding circle for the First 90 Days checklist now, first access to Gravitas at the founding price, and the book launch. Prefer to help? Support the work and keep the core tools free.</p>'+
       '<div class="gzpop-cta"><a class="btn blue" href="gravitas.html#join" data-pop="join">Register early <span class="arrow">&rarr;</span></a><a class="btn ghost" href="sponsors.html" data-pop="give">Support this work</a></div>'+
