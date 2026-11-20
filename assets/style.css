@@ -955,3 +955,25 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .strip .it span{display:block;font:700 17px 'Schibsted Grotesk',sans-serif;color:#fff;margin-top:8px}
 .strip .it em{display:block;font-style:normal;font-size:14px;line-height:1.5;color:#B4CADA;margin-top:6px;max-width:230px}
 @media(max-width:860px){.strip .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.strip .it:nth-child(even){border-left:0;padding-left:0}.strip .it:nth-child(odd){padding-left:22px}}
+
+/* The new executive, Nov 2026 */
+.newexec{padding:84px 0;background:#fff}
+.oldnew{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:34px}
+.oldnew .on{border-radius:20px;padding:28px 30px}
+.oldnew .old{background:#F1F4F7;border:1px dashed #C3D0DA}.oldnew .new{background:linear-gradient(135deg,#143650,#0F2233);color:#fff;box-shadow:0 30px 50px -30px rgba(15,34,51,.55)}
+.oldnew .tag{display:inline-block;font:700 12px 'Figtree',sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.oldnew .old .tag{color:#6b7f90}.oldnew .new .tag{color:#7CC4E8}
+.oldnew ul{list-style:none;margin:0;padding:0}.oldnew li{position:relative;padding:9px 0 9px 28px;font-size:17px;line-height:1.45}
+.oldnew .old li{color:#52667a;text-decoration:line-through;text-decoration-color:#b8c6d2}
+.oldnew li::before{content:"";position:absolute;left:0;top:16px;width:14px;height:2px;background:#b8c6d2}
+.oldnew .new li::before{background:#7CC4E8;height:3px;border-radius:2px}
+.arenahead{margin:44px 0 16px;font:700 22px 'Schibsted Grotesk',sans-serif}
+.arenas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.arenas article{background:#F3F8FC;border:1px solid #dbe6ef;border-radius:16px;padding:20px 18px;transition:transform .2s,border-color .2s}
+.arenas article:hover{transform:translateY(-4px);border-color:#1668A0}
+.arenas b{display:block;font:700 17px 'Schibsted Grotesk',sans-serif;color:#0F2233;margin-bottom:6px}
+.arenas p{margin:0;font-size:15px;line-height:1.5;color:#44586a}
+.neweq{margin:34px 0 22px;font-size:19px;line-height:1.55;max-width:860px;color:#0F2233}
+.neweq b{color:#1668A0}
+@media(max-width:1000px){.arenas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.oldnew{grid-template-columns:1fr}.arenas{grid-template-columns:1fr}}
