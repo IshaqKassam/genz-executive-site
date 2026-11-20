@@ -992,3 +992,4 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 @media(max-width:520px){.gzpop{padding:32px 22px 22px}.gzpop h2{font-size:25px}.gzpop-cta .btn{flex:1 1 100%;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.gzpop-back,.gzpop{transition:none}}
 .gzpop h2 .serif{display:block}
+.social{padding:84px 0;background:#fff}

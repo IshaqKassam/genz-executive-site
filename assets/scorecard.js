@@ -6,7 +6,7 @@
     {k:'Reading the room',t:'I notice who influences decisions, what people care about and how to adjust my approach to them.',tip:'Draw a simple map of the five people who most affect your work and write what each one needs from you.'},
     {k:'Ownership',t:'I treat my work as mine: I check quality, follow it through and fix problems without being chased.',tip:'Pick one task this week and own it end to end, including a final check and a short note on the result.'},
     {k:'Learning speed',t:'I ask for feedback, act on it quickly and keep learning outside my formal job description.',tip:'Ask one colleague each week, "What is one thing I could do better?" and act on the answer within three days.'},
-    {k:'Money habits',t:'I have a simple plan for my income: saving, spending and an emergency buffer.',tip:'Set up one automatic transfer to savings on payday, however small, and write a one-page money plan.'},
+    {k:'Social capital',t:'People trust me, would vouch for me and think of me when opportunities come up, because I keep my word and help others without keeping score.',tip:'This week send one specific thank-you, make one introduction and check in with someone you have not spoken to for months.'},
     {k:'Network',t:'I build relationships on purpose, with peers, seniors and people outside my company.',tip:'Message one person you admire this week with a specific question or a thank-you. Keep it short.'}
   ];
   var A=[],i=0,root=document.getElementById('sc');if(!root)return;
@@ -25,7 +25,7 @@
     if(s>=21)return['Laying foundations','The basics are forming. Focus on one or two skills for the next 30 days and the gains will show.'];
     return['Getting started','This is a normal place to begin. Pick one skill, run a small experiment this week, and re-score in 30 days.'];
   }
-  function rec(k){var m={'Money habits':'Start with The Career Compass workbook: it turns money and career goals into a plan you check every Friday.','Learning speed':'Start with The GenZ Executive Journal, with its weekly Friday reviews that turn experience into learning.','Network':'Start with the One-Pager Pack: clear templates for updates and meetings, so every conversation with someone new counts.'};return m[k]||'Start with the 90-Day Trust Build workbook: week-by-week moves and scripts for '+k.toLowerCase()+'. The Starter Bundle includes it and four more tools for '+(window.GZ_OFFER&&window.GZ_OFFER.open?'KES 3,200 at the founding price':'KES 3,900')+'.'}
+  function rec(k){var m={'Social capital':'Start with the Friday Move: each week, thank or help one person, and read the post on social capital in the blog.','Learning speed':'Start with The GenZ Executive Journal, with its weekly Friday reviews that turn experience into learning.','Network':'Start with the One-Pager Pack: clear templates for updates and meetings, so every conversation with someone new counts.'};return m[k]||'Start with the 90-Day Trust Build workbook: week-by-week moves and scripts for '+k.toLowerCase()+'. The Starter Bundle includes it and four more tools for '+(window.GZ_OFFER&&window.GZ_OFFER.open?'KES 3,200 at the founding price':'KES 3,900')+'.'}
   function done(){
     var s=A.reduce(function(a,b){return a+b},0),b=band(s);
     var rank=Q.map(function(q,n){return{k:q.k,v:A[n],tip:q.tip}}).sort(function(x,y){return x.v-y.v});
