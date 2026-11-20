@@ -48,3 +48,12 @@ var hb=document.querySelector('.hero-book .book');
 if(hb){var hero=document.querySelector('.hero');hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();
   var bw=hb.closest('.bookwrap');bw.style.transform='scale(1.04) rotateY('+(((e.clientX-r.left)/r.width-.5)*14).toFixed(1)+'deg) rotateX('+(((e.clientY-r.top)/r.height-.5)*-8).toFixed(1)+'deg)'});}
 })();
+/* motion pass: chart, module tiles, scroll progress */
+(function(){var rd=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function once(sel,thr){var el=document.querySelector(sel);if(!el)return;if(rd||!('IntersectionObserver' in window)){el.classList.add('in');return}
+ var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){el.classList.add('in');o.disconnect()}})},{threshold:thr||.3});o.observe(el)}
+once('#cmpchart',.35);once('.gf-mods',.25);
+if(!rd){var b=document.createElement('div');b.className='sprog';b.setAttribute('aria-hidden','true');document.body.appendChild(b);
+ var t=false;function up(){t=false;var h=document.documentElement.scrollHeight-innerHeight;b.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0).toFixed(4)+')'}
+ addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(up)}},{passive:true});up()}
+})();
