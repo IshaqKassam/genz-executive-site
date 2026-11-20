@@ -893,8 +893,36 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .tryfb{border-left:3px solid #dbe6ef;padding:8px 12px;margin:6px 0 0;border-radius:0 8px 8px 0;background:#f3f8fc;font-size:15px}.tryfb.good{border-color:#1c7c54;background:#e3f4ec}
 .trysec{padding:72px 0}.fit .cards.two{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:24px}
 @media(max-width:760px){.fit .cards.two{grid-template-columns:1fr}}
-.checks.no li::before{content:"\00D7";color:#b3402f}.who{margin-top:26px;padding:18px 22px;background:#fff;border-left:4px solid #1668A0;border-radius:0 12px 12px 0}
+.checks.no li::before{content:"\00D7";color:#b3402f}.whobuilt{margin-top:26px;padding:18px 22px;background:#fff;border-left:4px solid #1668A0;border-radius:0 12px 12px 0}
 
 .nolist{list-style:none;padding:0;margin:14px 0 0}.nolist li{position:relative;padding:0 0 12px 36px;color:var(--muted,#52667a)}
 .nolist li::before{content:"\00D7";position:absolute;left:0;top:-2px;width:24px;height:24px;border-radius:50%;background:#f6e3df;color:#b3402f;font-weight:700;text-align:center;line-height:24px}
 .trybox .tryq{color:#0F2233!important;font-weight:500}
+
+/* Wow pass, Nov 2026 */
+.prod.hot .who{display:inline-block;background:rgba(124,196,232,.14);color:#BFE3F7;padding:8px 12px;border-radius:8px}
+.prod .price s{opacity:.8;font-size:14px}
+.prod.hot .price s{color:#C5D8E6;opacity:.9}
+.book .face{font-synthesis:none}
+.book .ttl .b{overflow:hidden;max-width:100%}
+.gravfeat .gf-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.gf-price{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px}
+.gf-price>div{background:rgba(255,255,255,.06);border:1px solid rgba(124,196,232,.25);border-radius:14px;padding:14px 18px;min-width:170px}
+.gf-price b{display:block;font:700 28px 'Schibsted Grotesk',sans-serif;color:#fff;letter-spacing:-.02em}
+.gf-price>div:first-child b{color:#7CC4E8}.gf-price span{font-size:13px;color:#BFD6E6}
+.gf-mods{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:m}
+.gf-mods li{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 18px;color:#fff;font:600 17px 'Schibsted Grotesk',sans-serif;transition:transform .2s,border-color .2s,background .2s}
+.gf-mods li:hover{transform:translateY(-3px);border-color:#7CC4E8;background:rgba(124,196,232,.12)}
+.gf-mods li b{font:600 12px 'Figtree',sans-serif;letter-spacing:.12em;color:#7CC4E8}
+.gf-mods li.p{border-style:dashed}
+@media(max-width:900px){.gravfeat .gf-grid{grid-template-columns:1fr}}
+.alsorow .cards.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:34px}
+.alsorow .num{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue,#1668A0);font-weight:700}
+.alsorow .more{display:inline-block;margin-top:14px;font-weight:700;color:#1668A0}
+@media(max-width:760px){.alsorow .cards.two{grid-template-columns:1fr}}
+.homesample{padding:72px 0}
+.freeband+.freeband{margin-top:16px}
+.founder{padding-top:72px}
+@media(max-width:600px){.gf-mods{grid-template-columns:1fr 1fr}.gf-price>div{flex:1 1 140px}.trybox{padding:18px}.tryq{font-size:16px}}
+@font-face{font-family:'Anton Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans');size-adjust:64%;font-weight:400}
+.book .ttl,.book .by{font-family:'Anton','Anton Fallback',Impact,'Arial Narrow',sans-serif}
