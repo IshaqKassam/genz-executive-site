@@ -41,8 +41,6 @@ var B=[
 [3, "Crucial Conversations", "Patterson, Grenny, McMillan and Switzler", "How to speak up when the stakes are high.", ""],
 [3, "Never Split the Difference", "Chris Voss", "Negotiation that helps in salary talks and deals.", ""],
 [3, "Made to Stick", "Chip Heath and Dan Heath", "Make your ideas memorable.", ""],
-[3, "Give and Take", "Adam Grant", "Why helping others, wisely, builds careers and trust.", ""],
-[3, "Never Eat Alone", "Keith Ferrazzi", "Build real relationships before you need them.", ""],
 [3, "Show Your Work!", "Austin Kleon", "Share what you are learning so people can find you.", "r"],
 [3, "Radical Candor", "Kim Scott", "Give and receive honest feedback without being unkind.", ""],
 [3, "Emotional Intelligence", "Daniel Goleman", "Why reading yourself and others matters as much as IQ.", ""],
