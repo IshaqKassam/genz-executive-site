@@ -11,7 +11,7 @@ if(st){var lis=[].slice.call(st.children);
 
 /* word-by-word headline */
 document.querySelectorAll('h1.words').forEach(function(h){var out='',i=0;
-  function walk(n,cls){n.childNodes.forEach(function(c){if(c.nodeType===3){c.textContent.split(/(\s+)/).forEach(function(t){if(!t)return;if(/^\s+$/.test(t))out+=' ';else{out+='<span class="w'+(cls?' '+cls:'')+'" style="animation-delay:'+(0.15+i*0.09).toFixed(2)+'s">'+t+'</span>';i++}})}else if(c.nodeType===1){walk(c,c.className==='serif'?'gsr':'')}})}
+  function walk(n,cls){n.childNodes.forEach(function(c){if(c.nodeType===3){c.textContent.split(/(\s+)/).forEach(function(t){if(!t)return;if(/^\s+$/.test(t))out+=' ';else{out+='<span class="w'+(cls?' '+cls:'')+'" style="animation-delay:'+(0.15+i*0.09).toFixed(2)+'s">'+t+'</span>';i++}})}else if(c.nodeType===1){if(c.className==='serif'){out+='<span class="serif">';walk(c,'gsr');out+='</span>'}else walk(c,'')}})}
   walk(h,'');h.innerHTML=out});
 /* six marks timeline fill */
 var tl2=document.querySelector('.tl2');

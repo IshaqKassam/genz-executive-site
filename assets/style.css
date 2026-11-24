@@ -712,7 +712,7 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .why::before,#marks::before{content:"";display:block;height:0}
 @media(prefers-reduced-motion:reduce){.words .w,.gate .stone,.gate .pil,.gate .fig,.gate .glow,.archkey li{opacity:1!important;transform:none!important;animation:none!important}.gate .ground{stroke-dashoffset:0!important;animation:none!important}.ico2 *{stroke-dashoffset:0!important}.gravhero .orb{animation:none}}
 
-.words .gsr{font-family:'Instrument Serif',Georgia,serif;font-weight:400;color:var(--sky)}
+.words .gsr{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:var(--sky)}
 
 /* ===== Site-wide visual layer ===== */
 /* path replaces the old ladder: a glowing route, no stairs */
