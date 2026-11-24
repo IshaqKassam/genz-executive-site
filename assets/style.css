@@ -993,3 +993,4 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 @media(prefers-reduced-motion:reduce){.gzpop-back,.gzpop{transition:none}}
 .gzpop h2 .serif{display:block}
 .social{padding:84px 0;background:#fff}
+.gravhero h1{font-size:clamp(38px,4.6vw,66px)}
