@@ -31,5 +31,5 @@ var SITE = {
   pledgeUrl: "",
   contactEmail: "ishaq.kassam@gmail.com",
   linkedin: "",
-  deliveryPromise: "Your files are emailed to you within one working day of payment."
+  deliveryPromise: "Your files are ready to download the moment your payment is confirmed."
 };
