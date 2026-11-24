@@ -20,7 +20,7 @@ var SITE = {
   pay: { bundle: "", wb90: "", wb10: "", jour: "", planner: "", meetings: "", strategy: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
   // On-site checkout: Paystack popup + the payments Worker (see book/50). BOTH must be filled to switch it on.
   // Until then Buy buttons fall back to the pay links above, then to an order email. paystackKey is the PUBLIC key (pk_...), safe to publish.
-  checkout: { paystackKey: "pk_test_a83e3234ef67ed51377fd89bafc5c888d58b5c04", worker: "https://pay.genzexecutive.com" },
+  checkout: { paystackKey: "pk_live_aa284585fc274a4e9e0810fafee42f53e17f16c8", worker: "https://pay.genzexecutive.com" },
   offer: { ends: "2027-02-28T23:59:59+03:00" },
   payRegular: { bundle: "", wb90: "", wb10: "", jour: "", planner: "", meetings: "", strategy: "", scorecards: "", toolkit: "", onepager: "", wallpapers: "" },
   // MailerLite: paste the form action URL from your MailerLite embedded form (https://assets.mailerlite.com/jsonp/ACCOUNT/forms/FORMID/subscribe). Leave empty until ready.
