@@ -28,6 +28,7 @@ var SITE = {
   // Ask Ishaq form (Google Form). Paste the formResponse URL and the entry ids. Empty = opens the visitor's email app instead.
   ask: { action: "https://docs.google.com/forms/d/e/1FAIpQLSd3pqNU3zoM63YpgB6ztMuv9Ttq4ZeGjXEd7AofMDwV0EOX0Q/formResponse", fields: { type: "entry.1677326359", message: "entry.1313779110", name: "entry.616311508", email: "entry.948189006", feature: "entry.1511880767" } },
   giftUrl: "",
+  giftPlans: {},
   pledgeUrl: "",
   contactEmail: "ishaq.kassam@gmail.com",
   linkedin: "",

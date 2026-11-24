@@ -233,6 +233,66 @@
   $$('.js-linkedin').forEach(function(a){if(li){a.href=li;a.target='_blank';a.rel='noopener noreferrer'}else{a.style.display='none'}});
   $$('.js-email').forEach(function(a){if(S.contactEmail){a.href='mailto:'+S.contactEmail;a.textContent=S.contactEmail}else{a.style.display='none'}});
   $$('.js-gift').forEach(function(a){var m=a.getAttribute('data-kind')==='monthly',u=m?S.pledgeUrl:S.giftUrl;if(u){a.href=u;a.target='_blank';a.rel='noopener'}else if(S.contactEmail){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent(m?'Monthly gift pledge':'A gift for The GenZ Executive')+'&body='+encodeURIComponent('Hello Ishaq,\n\nI would like to '+(m?'pledge a monthly gift':'give a gift')+'. Please send me the details.\n\nName (or anonymous):\nAmount I have in mind:\n')}else{a.style.display='none'}});
+  /* gift self-checkout: Paystack popup, one-off or monthly (plan codes) */
+  (function(){
+    var CO=S.checkout||{},on=!!(CO.paystackKey&&safe(CO.worker));if(!on)return;
+    var plans=S.giftPlans||{},planAmts=Object.keys(plans).filter(function(k){return plans[k]}).map(Number).sort(function(a,b){return a-b});
+    var onceAmts=[500,1000,2500,5000],gm,kind,lastBtn,busy=false,amt=0;
+    var kes=function(n){return 'KES '+Number(n).toLocaleString('en-US')};
+    var lp=function(cb){if(window.PaystackPop)return cb();var sc=document.createElement('script');sc.src='https://js.paystack.co/v2/inline.js';sc.onload=function(){cb()};sc.onerror=function(){cb(new Error('load'))};document.head.appendChild(sc)};
+    var ge=function(m){var e=$('.coerr',gm);e.textContent=m;e.hidden=!m};
+    var gclose=function(){if(!gm)return;gm.hidden=true;document.body.classList.remove('colock');if(lastBtn&&lastBtn.focus)lastBtn.focus()};
+    var pick=function(n){amt=n;$$('.gchip',gm).forEach(function(c){c.setAttribute('aria-pressed',String(Number(c.getAttribute('data-a'))===n))});var cu=$('#gf-c',gm);if(cu&&n&&String(cu.value)!==String(n))cu.value=''};
+    var build=function(){
+      if(gm)return gm;
+      gm=document.createElement('div');gm.className='cobox';gm.hidden=true;gm.setAttribute('role','dialog');gm.setAttribute('aria-modal','true');gm.setAttribute('aria-labelledby','gf-t');
+      gm.innerHTML='<div class="cobody"><button type="button" class="coclose" aria-label="Close">&times;</button><div class="gform"><h3 id="gf-t"></h3><p class="coprice"></p><form novalidate><label>Choose an amount</label><div class="gchips"></div><div class="gcustom"><label for="gf-c">Or your own amount (KES)</label><input id="gf-c" type="number" inputmode="numeric" min="100" step="50" placeholder="e.g. 3000"></div><label for="gf-n">Your name (optional)</label><input id="gf-n" type="text" autocomplete="name" placeholder="Leave blank to stay anonymous"><label for="gf-e">Email for your receipt</label><input id="gf-e" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><p class="coerr" role="alert" hidden></p><button class="btn blue" type="submit">Continue <span class="arrow">&rarr;</span></button></form><p class="conote">Pay by M-Pesa or card. Paystack handles the payment, so we never see your card or M-Pesa details. A gift is a voluntary thank-you and buys no influence over what we write or recommend.</p></div><div class="gdone" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="34" height="34"><path d="M5 12l5 5 9-10"/></svg></div><h3>Thank you.</h3><p class="gthanks"></p><button type="button" class="btn blue gok">Close</button></div></div>';
+      document.body.appendChild(gm);
+      $('.coclose',gm).addEventListener('click',gclose);$('.gok',gm).addEventListener('click',gclose);
+      gm.addEventListener('click',function(e){if(e.target===gm)gclose()});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!gm.hidden)gclose()});
+      gm.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('.gchip');if(c){pick(Number(c.getAttribute('data-a')))}});
+      $('#gf-c',gm).addEventListener('input',function(){var v=parseInt(this.value,10);amt=isNaN(v)?0:v;$$('.gchip',gm).forEach(function(c){c.setAttribute('aria-pressed','false')})});
+      $('form',gm).addEventListener('submit',function(e){
+        e.preventDefault();if(busy)return;
+        var monthly=kind==='monthly',email=$('#gf-e',gm).value.trim(),nm=$('#gf-n',gm).value.trim().slice(0,80);
+        if(!amt||amt<100){ge('Please choose an amount of KES 100 or more.');return}
+        if(amt>500000){ge('For gifts above KES 500,000, please write to us and we will arrange it.');return}
+        if(monthly&&!plans[amt]){ge('Please choose one of the monthly amounts.');return}
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ge('Please enter a valid email address.');return}
+        ge('');busy=true;var btn=$('button[type=submit]',gm);btn.disabled=true;
+        var rnd=(window.crypto&&crypto.getRandomValues)?[].slice.call(crypto.getRandomValues(new Uint8Array(6))).map(function(b){return b.toString(16).padStart(2,'0')}).join(''):String(Math.random()).slice(2,14),ref='GF'+Date.now().toString(36)+rnd,done=function(){busy=false;btn.disabled=false};
+        lp(function(le){
+          if(le||!window.PaystackPop){done();ge('We could not load the payment window. Check your connection and try again.');return}
+          try{
+            var o={key:CO.paystackKey,email:email,amount:amt*100,currency:'KES',reference:ref,
+              metadata:{type:'gift',kind:monthly?'monthly':'once',donor:nm||'Anonymous',site:'genzexecutive.com',custom_fields:[{display_name:'Type',variable_name:'type',value:monthly?'Monthly gift':'One-off gift'},{display_name:'Name',variable_name:'donor',value:nm||'Anonymous'}]},
+              onSuccess:function(){done();$('.gform',gm).hidden=true;var d=$('.gdone',gm);d.hidden=false;$('.gthanks',d).textContent=monthly?'Your monthly gift of '+kes(amt)+' is set up. A receipt is on its way to '+email+'. You can stop it any time from the link in your Paystack receipt.':'Your gift of '+kes(amt)+' has gone through. A receipt is on its way to '+email+'. It will help more young people get the tools to grow.'},
+              onCancel:function(){done()},
+              onError:function(){done();ge('The payment window could not open. Please try again.')}};
+            if(monthly)o.plan=plans[amt];
+            new window.PaystackPop().newTransaction(o);
+          }catch(x){done();ge('The payment window could not open. Please try again.')}
+        });
+      });
+      return gm;
+    };
+    $$('.js-gift').forEach(function(a){
+      var monthly=a.getAttribute('data-kind')==='monthly';
+      if(monthly&&!planAmts.length)return;
+      a.addEventListener('click',function(e){
+        e.preventDefault();kind=monthly?'monthly':'once';lastBtn=a;var m=build();
+        $('.gform',m).hidden=false;$('.gdone',m).hidden=true;
+        $('#gf-t',m).textContent=monthly?'Pledge a monthly gift':'Give a gift';
+        $('.coprice',m).textContent=monthly?'Renews every month. Cancel any time.':'One-off. Any amount helps.';
+        var list=monthly?planAmts:onceAmts;
+        $('.gchips',m).innerHTML=list.map(function(n){return '<button type="button" class="gchip" data-a="'+n+'" aria-pressed="false">'+kes(n)+'</button>'}).join('');
+        $('.gcustom',m).hidden=monthly;$('#gf-c',m).value='';amt=0;
+        if(list.length>1)pick(list[1]);else if(list.length)pick(list[0]);
+        ge('');m.hidden=false;document.body.classList.add('colock');setTimeout(function(){$('.gchip',m)&&$('.gchip',m).focus()},40);
+      },true);
+    });
+  })();
   $$('.js-enquiry').forEach(function(a){if(S.contactEmail&&a.getAttribute('data-subject')){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent(a.getAttribute('data-subject'))+'&body='+encodeURIComponent(a.getAttribute('data-body')||'');return}if(S.contactEmail){a.href='mailto:'+S.contactEmail+'?subject='+encodeURIComponent('Speaking enquiry')+'&body='+encodeURIComponent('Hello Ishaq,\n\nEvent and organisation:\nAudience and size:\nPreferred date and place (or online):\nAnything specific you want covered:\n\nThank you,\n')}else{a.style.display='none'}});
   var yr=$('#yr');if(yr)yr.textContent=new Date().getFullYear();
 

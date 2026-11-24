@@ -994,3 +994,13 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
 .gzpop h2 .serif{display:block}
 .social{padding:84px 0;background:#fff}
 .gravhero h1{font-size:clamp(38px,4.6vw,66px)}
+
+.gchips{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 16px}
+.gchip{font:700 17px 'Schibsted Grotesk',sans-serif;padding:14px 10px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);cursor:pointer}
+.gchip[aria-pressed=true]{border-color:var(--bright);background:var(--mist);color:var(--ink)}
+.gcustom{margin-bottom:16px}
+.cobody input[type=number],.cobody input[type=text]{width:100%;font:17px 'Figtree',sans-serif;padding:15px 16px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);margin-bottom:16px}
+.cobody input[type=number]:focus,.cobody input[type=text]:focus{border-color:var(--bright);outline:0}
+.gform .conote{margin-top:14px}
+.gdone{text-align:center;padding:10px 0}.gdone .tick{width:64px;height:64px;border-radius:50%;background:var(--mist);color:var(--bright);display:grid;place-items:center;margin:0 auto 14px}
+.gdone h3{margin:0 0 8px}
