@@ -237,7 +237,7 @@
   (function(){
     var CO=S.checkout||{},on=!!(CO.paystackKey&&safe(CO.worker));if(!on)return;
     var plans=S.giftPlans||{},planAmts=Object.keys(plans).filter(function(k){return plans[k]}).map(Number).sort(function(a,b){return a-b});
-    var onceAmts=[500,1000,2500,5000],gm,kind,lastBtn,busy=false,amt=0;
+    var onceAmts=[5000,10000,25000,50000],gm,kind,lastBtn,busy=false,amt=0;
     var kes=function(n){return 'KES '+Number(n).toLocaleString('en-US')};
     var lp=function(cb){if(window.PaystackPop)return cb();var sc=document.createElement('script');sc.src='https://js.paystack.co/v2/inline.js';sc.onload=function(){cb()};sc.onerror=function(){cb(new Error('load'))};document.head.appendChild(sc)};
     var ge=function(m){var e=$('.coerr',gm);e.textContent=m;e.hidden=!m};
@@ -246,7 +246,7 @@
     var build=function(){
       if(gm)return gm;
       gm=document.createElement('div');gm.className='cobox';gm.hidden=true;gm.setAttribute('role','dialog');gm.setAttribute('aria-modal','true');gm.setAttribute('aria-labelledby','gf-t');
-      gm.innerHTML='<div class="cobody"><button type="button" class="coclose" aria-label="Close">&times;</button><div class="gform"><h3 id="gf-t"></h3><p class="coprice"></p><form novalidate><label>Choose an amount</label><div class="gchips"></div><div class="gcustom"><label for="gf-c">Or your own amount (KES)</label><input id="gf-c" type="number" inputmode="numeric" min="100" step="50" placeholder="e.g. 3000"></div><label for="gf-n">Your name (optional)</label><input id="gf-n" type="text" autocomplete="name" placeholder="Leave blank to stay anonymous"><label for="gf-e">Email for your receipt</label><input id="gf-e" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><p class="coerr" role="alert" hidden></p><button class="btn blue" type="submit">Continue <span class="arrow">&rarr;</span></button></form><p class="conote">Pay by M-Pesa or card. Paystack handles the payment, so we never see your card or M-Pesa details. A gift is a voluntary thank-you and buys no influence over what we write or recommend.</p></div><div class="gdone" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="34" height="34"><path d="M5 12l5 5 9-10"/></svg></div><h3>Thank you.</h3><p class="gthanks"></p><button type="button" class="btn blue gok">Close</button></div></div>';
+      gm.innerHTML='<div class="cobody"><button type="button" class="coclose" aria-label="Close">&times;</button><div class="gform"><h3 id="gf-t"></h3><p class="coprice"></p><form novalidate><label>Choose an amount</label><div class="gchips"></div><div class="gcustom"><label for="gf-c">Or your own amount (KES)</label><input id="gf-c" type="number" inputmode="numeric" min="5000" max="50000" step="500" placeholder="5,000 to 50,000"></div><label for="gf-n">Your name (optional)</label><input id="gf-n" type="text" autocomplete="name" placeholder="Leave blank to stay anonymous"><label for="gf-e">Email for your receipt</label><input id="gf-e" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><p class="coerr" role="alert" hidden></p><button class="btn blue" type="submit">Continue <span class="arrow">&rarr;</span></button></form><p class="conote">Pay by M-Pesa or card. Paystack handles the payment, so we never see your card or M-Pesa details. A gift is a voluntary thank-you and buys no influence over what we write or recommend.</p></div><div class="gdone" hidden><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="34" height="34"><path d="M5 12l5 5 9-10"/></svg></div><h3>Thank you.</h3><p class="gthanks"></p><button type="button" class="btn blue gok">Close</button></div></div>';
       document.body.appendChild(gm);
       $('.coclose',gm).addEventListener('click',gclose);$('.gok',gm).addEventListener('click',gclose);
       gm.addEventListener('click',function(e){if(e.target===gm)gclose()});
@@ -256,8 +256,8 @@
       $('form',gm).addEventListener('submit',function(e){
         e.preventDefault();if(busy)return;
         var monthly=kind==='monthly',email=$('#gf-e',gm).value.trim(),nm=$('#gf-n',gm).value.trim().slice(0,80);
-        if(!amt||amt<100){ge('Please choose an amount of KES 100 or more.');return}
-        if(amt>500000){ge('For gifts above KES 500,000, please write to us and we will arrange it.');return}
+        if(!amt||amt<5000){ge('Please choose an amount of KES 5,000 or more.');return}
+        if(amt>50000){ge('For gifts above KES 50,000, please write to us and we will arrange it.');return}
         if(monthly&&!plans[amt]){ge('Please choose one of the monthly amounts.');return}
         if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ge('Please enter a valid email address.');return}
         ge('');busy=true;var btn=$('button[type=submit]',gm);btn.disabled=true;
@@ -288,7 +288,7 @@
         var list=monthly?planAmts:onceAmts;
         $('.gchips',m).innerHTML=list.map(function(n){return '<button type="button" class="gchip" data-a="'+n+'" aria-pressed="false">'+kes(n)+'</button>'}).join('');
         $('.gcustom',m).hidden=monthly;$('#gf-c',m).value='';amt=0;
-        if(list.length>1)pick(list[1]);else if(list.length)pick(list[0]);
+        if(list.length)pick(list[0]);
         ge('');m.hidden=false;document.body.classList.add('colock');setTimeout(function(){$('.gchip',m)&&$('.gchip',m).focus()},40);
       },true);
     });
